@@ -1,0 +1,26 @@
+
+
+/*Tamaño del logo*/
+.logo img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;  
+    object-fit: cover;
+    border: none;
+    box-shadow: 0 0 10px rgba (0,0,0,0.5);
+}
+
+/* Centrar logo */
+.logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+/* Separar btn nav */
+nav {
+    display: flex;
+    gap: 1.5rem;
+}
