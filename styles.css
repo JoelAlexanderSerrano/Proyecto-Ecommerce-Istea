@@ -12,35 +12,158 @@ body {
     color: #333;
 }
 
+/* HEADER BASE */
 header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: #222;
-    color: #fff;
-    padding: 15px 30px;
-    
+  display: flex;
+  align-items: center;   /* centra verticalmente */
+  justify-content: space-between; /* reparte espacio */
+  background-color: #1c1c1c;
+  padding: 10px 30px;
+  border-bottom: 3px solid white;
 }
 
-header .logo {
-    font-size: 1,5rem;
-    font-weight: bold;
+/* LOGO */
+.logo img {
+  max-width: 120px;
+  height: auto;          /* mantiene proporciones originales */
+  display: block;
+  margin: 0 auto;
+  border-radius: 50%;
 }
 
+/* BARRA DE BÚSQUEDA */
+.search-bar {
+  flex: 1;                  /* ocupa todo el espacio disponible */
+  display: flex;
+  justify-content: center;   /* centra horizontal */
+  margin: 0 30px;           /* separación entre logo y menú */
+}
+
+.search-bar input {
+  width: 70%;   /* ancho proporcional */
+  padding: 10px;
+  border-radius: 25px 0 0 25px;
+  border: none;
+  outline: none;
+  font-size: 14px;
+}
+
+.search-bar button {
+  padding: 10px 15px;
+  border-radius: 0 25px 25px 0;
+  border: none;
+  background: #f39c12;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+/* MENÚ DE NAVEGACIÓN */
 nav ul {
-    display: flex;
-    list-style: none;
-    gap: 20px;
+  display: flex;
+  gap: 20px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
-nav a {
-    text-decoration: none;
-    color: #fff;
-    transition: color 0.3s;
+nav ul li a {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
 }
 
-nav a:hover {
-    color: #f39c12;
+nav ul li a:hover {
+  color: #f39c12;
+}
+
+/* Menú principal */
+.navbar ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center; /* centra la barra */
+  background: #111;
+}
+
+.navbar ul li {
+  position: relative;
+}
+
+.navbar ul li a {
+  display: block;
+  padding: 15px 20px;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.navbar ul li a:hover {
+  background: #ff9800;
+  border-radius: 5px;
+}
+
+/* Submenú oculto */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 100%;   /* justo debajo del padre */
+  left: 0;
+  background: #222;
+  min-width: 140px;
+  border-radius: 5px;
+}
+
+.dropdown-content li {
+  display: block; /* hace que cada elemento esté en línea vertical */
+}
+
+.dropdown-content li a {
+  padding: 10px 15px;
+  display: block;
+  color: white;
+  text-decoration: none;
+}
+
+.dropdown-content li a:hover {
+  background: #ff9800;
+}
+
+/* Mostrar submenú al pasar mouse */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.busqueda {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+
+}
+
+.busqueda input {
+  width: 60%; /* más alargada */
+  padding: 10px;
+  border-radius: 25px 0 0 25px;
+  border: none;
+  outline: none;
+  font-size: 14px;
+}
+
+.busqueda button {
+   padding: 10px 15px;
+  border-radius: 0 25px 25px 0;
+  border: none;
+  background: #f39c12;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.busqueda button:hover {
+  background: #e67e22;
 }
 
 .carrito {
@@ -137,24 +260,6 @@ nav a:hover {
   background: #219150;
 }
 
-/*Tamaño del logo*/
-.logo img {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;  
-    object-fit: cover;
-    border: none;
-    box-shadow: 0 0 10px rgba (0,0,0,0.5);
-}
-
-/* Centrar logo */
-.logo {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 1rem;
-}
 
 /* Separar btn nav */
 nav {
