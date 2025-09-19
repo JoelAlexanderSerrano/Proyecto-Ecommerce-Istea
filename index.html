@@ -1,83 +1,103 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gamepad Retro</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Gamepad Retro</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-    
-    <header>
-         <div class="logo">
-    <img src="Logo.jpg"Logo Retro" />
-  </div>
-  <div class="search-bar">
-    <input type="text" placeholder="Buscar joystick..." />
-    <button>🔍</button>
-  </div>
-  <nav class="navbar">
-  <ul>
-    <li class="dropdown">
-      <a href="#">Joysticks ▾</a>
-      <ul class="dropdown-content">
-        <li><a href="#">Playstation</a></li>
-        <li><a href="#">Xbox</a></li>
-        <li><a href="#">Nintendo</a></li>
-        <li><a href="#">Retro</a></li>
-        <li><a href="#">Arcade</a></li>
+
+  <header>
+    <div class="logo">
+      <img src="Logo.jpg" alt="Logo Retro" />
+    </div>
+
+    <div class="search-bar">
+      <input type="text" placeholder="Buscar joystick..." />
+      <button aria-label="Buscar">🔍</button>
+    </div>
+
+    <!-- checkbox + label (hamburguesa) - sin JS -->
+    <input type="checkbox" id="menu-toggle" />
+    <label for="menu-toggle" class="menu-icon" aria-hidden="true">☰</label>
+
+    <nav class="navbar">
+      <ul class="menu">
+        <li class="dropdown">
+          <a href="#">Joysticks ▾</a>
+          <ul class="dropdown-content">
+            <li><a href="playstation.html">Playstation</a></li>
+            <li><a href="xbox.html">Xbox</a></li>
+            <li><a href="nintendo.html">Nintendo</a></li>
+            <li><a href="retro.html">Retro</a></li>
+            <li><a href="arcade.html">Arcade</a></li>
+          </ul>
+        </li>
+        <li><a href="ofertas.html">Ofertas</a></li>
+        <li><a href="contacto.html">Contacto</a></li>
       </ul>
-    </li>
-    <li><a href="#">Ofertas</a></li>
-    <li><a href="#">Contactos</a></li>
-    </ul>
-  </nav>
+    </nav>
 
-        <div class="carrito"> 🛒</div>
-    </header>
-   
-    <section class="hero">
-      <h1>Bienvenidos a mi tienda</h1>
-      <p>Encontrá los mejores joysticks al mejor precio.</p>  
-        <button>Comprar ahora</button>
-    </section>
+    <div class="carrito" title="Carrito">🛒</div>
+  </header>
 
-    <main class="productos">
-        <H2>Productos Destacados</H2>
-        <div class="grid">
-        <article class="producto">
-        <img src="https://m.media-amazon.com/images/I/615q9SpEdhL._SL1500_.jpg" alt="DualSense Wireless">    
+  <!-- Banner de propagandas -->
+<section class="banner">
+  <div class="slides">
+    <div class="slide">
+      <img src="banner ps5.webp" alt="Banner ps5">
+    </div>
+    <div class="slide">
+      <img src="banner nintendo.webp" alt="Banner nintendo">
+    </div>
+    <div class="slide">
+      <img src="banner xbox.png" alt="banner xbox">
+    </div>
+  </div>
+</section>
+
+  <main class="productos">
+    <h2>Productos Destacados</h2>
+    <div class="grid">
+      <article class="producto">
+        <img src="https://m.media-amazon.com/images/I/615q9SpEdhL._SL1500_.jpg" alt="DualSense Wireless">
         <h3>Joystick Dualsense Ps5 30 Aniversario</h3>
-        <p>$100,000</p>
+        <p>$100.000</p>
         <button>Agregar al carrito</button>
-        </article>
-        <article class="producto">
-        <img src="https://m.media-amazon.com/images/I/71u6swheFZL._SL1500_.jpg" alt="Producto 2">
+      </article>
+
+      <article class="producto">
+        <img src="https://m.media-amazon.com/images/I/71u6swheFZL._SL1500_.jpg" alt="Joystick Nintendo">
         <h3>Joystick Nintendo Switch 2 OLED</h3>
-        <p>90,000</p>
-        <button>Agregar al carrito</button>       
-        </article>
-        <article class="producto">
-        <img src="https://m.media-amazon.com/images/I/615KnbjRmTL._SL1500_.jpg" alt="Producto 3">
+        <p>$90.000</p>
+        <button>Agregar al carrito</button>
+      </article>
+
+      <article class="producto">
+        <img src="https://m.media-amazon.com/images/I/615KnbjRmTL._SL1500_.jpg" alt="Joystick Xbox">
         <h3>Joystick Xbox Serie S</h3>
-        <p>100,000</p>
-        <button>Agregar al carrito</button>    
-        </article>
-        <article class="producto">
-        <img src="https://m.media-amazon.com/images/I/51iXILIT27L._SL1000_.jpg" alt="Producto 4">
+        <p>$100.000</p>
+        <button>Agregar al carrito</button>
+      </article>
+
+      <article class="producto">
+        <img src="https://m.media-amazon.com/images/I/51iXILIT27L._SL1000_.jpg" alt="GameSir G7">
         <h3>Joystick GameSir G7 SE</h3>
-        <p>50,000</p>
-        <button>Agregar al carrito</button>        
-        </article>
+        <p>$50.000</p>
+        <button>Agregar al carrito</button>
+      </article>
+    </div>
+  </main>
 
-        </div>
+  <footer>
+  <p>&copy; 2025 Retro Gamepad - Todos los derechos reservados.</p>
+  <div class="socials">
+    <a href="#">🐦 Twitter</a>
+    <a href="#">📘 Facebook</a>
+    <a href="#">📸 Instagram</a>
+  </div>
+</footer>
 
-    </main>
-
-    <footer>
-      <p>&copy; 2025 Retro Gamepad - Todos los derechos reservados.</p></p>
-    </footer>
-
-    
 </body>
 </html>
