@@ -121,7 +121,29 @@ header {
 }
 
 /* carrito */
-.carrito { font-size: 1.5rem; cursor: pointer; color: white; padding: 6px; }
+.carrito { font-size: 1.5rem; 
+cursor: pointer; 
+color: white; 
+padding: 6px; 
+margin-right: 80px;
+position: relative;
+}
+
+/* Contador carrito */
+.carrito .contador {
+  position: absolute;
+  top: -6px;
+  right: -10px;
+  background: red;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  border-radius: 50%;
+  padding: 2px 6px;
+  min-width: 18px;
+  text-align: center;
+  line-height: 1.2;
+}
 
 /* ====== RESPONSIVE (mobile) ====== */
 @media (max-width: 768px) {
@@ -201,10 +223,11 @@ header {
 
 /* Logo */
 .logo img {
-  max-width: 120px;
-  height: auto;
+  width: 120px;
+  height: 120px;
   display: block;
   border-radius: 50%;
+  object-fit: cover;
 }
 
 /* Search */
@@ -244,7 +267,9 @@ header {
 #menu-toggle { display: none; } /* checkbox hide */
 
 /* Desktop: horizontal menu */
-.navbar { flex: 0 1 auto; }
+.navbar { flex: 0 1 auto; 
+margin-right: 80px;
+}
 .menu {
   list-style: none;
   display: flex;
@@ -300,7 +325,7 @@ header {
 }
 
 /* carrito */
-.carrito { font-size: 1.5rem; cursor: pointer; color: white; padding: 6px; }
+.carrito { font-size: 1.5rem; cursor: pointer; color: white; padding: 6px;}
 
 /* ====== RESPONSIVE (mobile) ====== */
 @media (max-width: 768px) {
@@ -449,7 +474,7 @@ header {
 
 .slide img {
   width: 100%;
-  height: 600px;
+  height: 500px;
   display: block;
   border-radius: 12px;
 }
