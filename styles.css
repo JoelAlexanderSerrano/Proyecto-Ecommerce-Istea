@@ -148,10 +148,20 @@ position: relative;
 /* ====== RESPONSIVE (mobile) ====== */
 @media (max-width: 768px) {
   /* organiza el header en columnas: el orden se controla con el flujo HTML */
-  header { padding: 10px 14px; }
+  header { 
+    padding: 10px 14px; 
+  }
 
   /* mostrar el icono hamburguesa */
-  .menu-icon { display: block; order: 2; }
+  .menu-icon { 
+    display: block; 
+    order: 2; 
+  }
+
+  /* ocultar el banner en mobile */
+  .banner {
+    display: none;
+  }
 
   /* search se va en su propia fila y ocupa 100% */
   .search-bar {
