@@ -17,7 +17,7 @@
 
     <div class="search-bar">
       <input type="text" placeholder="Buscar joystick..." />
-      <button aria-label="Buscar">🔍</button>
+      <button class="btn-buscar" aria-label="Buscar">🔍</button>
     </div>
 
     <!-- checkbox + label (hamburguesa) - sin JS -->
@@ -49,18 +49,29 @@
 
   </header>
 
-  <!-- Banner de propagandas -->
+<!-- Banner de propagandas -->
 <section class="banner">
   <div class="slides">
-    <div class="slide">
-      <img src="Images\banner ps5.webp" alt="Banner ps5">
+    <div class="slide active">
+      <img src="Images/banner ps5.webp" alt="Banner PS5">
     </div>
     <div class="slide">
-      <img src="Images\banner nintendo.webp" alt="Banner nintendo">
+      <img src="Images/banner nintendo.webp" alt="Banner Nintendo">
     </div>
     <div class="slide">
-      <img src="Images\banner xbox.png" alt="banner xbox">
+      <img src="Images/banner xbox.png" alt="Banner Xbox">
     </div>
+  </div>
+
+  <!-- Botones manuales -->
+  <button class="prev">&#10094;</button>
+  <button class="next">&#10095;</button>
+
+  <!-- Indicadores de slides -->
+  <div class="slider-controls">
+    <button class="dot active" data-slide="0"></button>
+    <button class="dot" data-slide="1"></button>
+    <button class="dot" data-slide="2"></button>
   </div>
 </section>
 
@@ -106,5 +117,7 @@
   </div>
 </footer>
 
+  <script type="module" src="js/main.js"></script>
+  <script type="module" src="js/slider.js"></script>
 </body>
 </html>
