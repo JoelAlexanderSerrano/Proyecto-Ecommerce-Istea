@@ -1,25 +1,20 @@
 import Airtable from "airtable";
 
 export default async function handler(req, res) {
+    
+    // ⬇️ SOLUCIÓN SIMPLIFICADA PARA CORS ⬇️
+    // Esto debería ser suficiente para permitir el acceso desde tu Live Server
     res.setHeader('Access-Control-Allow-Origin', '*'); 
-    res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-
-
-    if (req.method === 'OPTIONS') {
-        res.status(200).end();
-        return;
-    }
-
+    res.setHeader('Access-Control-Allow-Methods', 'GET');
+    // ⬆️ FIN DEL BLOQUE CORS ⬆️
 
     const base = new Airtable({ apiKey: process.env.AIRTABLE_API_KEY })
         .base(process.env.AIRTABLE_BASE_ID);
 
     if (req.query.id) {
-
+        // DETALLE
         try {
             const record = await base('Productos').find(req.query.id);
-           
             return res.json({
                 id: record.id,
                 nombre: record.fields.Nombre,
@@ -32,6 +27,7 @@ export default async function handler(req, res) {
         }
     }
 
+    // LISTA
     try {
         const records = await base('Productos').select().all();
 
@@ -43,10 +39,8 @@ export default async function handler(req, res) {
             imagen: record.fields.Imagen ? record.fields.Imagen[0].url : ""
         }));
 
-
         res.json(productos);
     } catch (error) {
-
         console.error("Error al obtener productos de Airtable:", error);
         res.status(500).json({ error: "Fallo al conectar con la base de datos." });
     }
