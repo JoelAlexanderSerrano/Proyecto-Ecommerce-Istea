@@ -1,0 +1,17 @@
+export const productImages = [
+  "https://http2.mlstatic.com/D_NQ_NP_2X_644633-MLA89778623673_082025-F.webp",
+  "https://http2.mlstatic.com/D_NQ_NP_2X_866849-MLA91890271839_092025-F.webp",
+  "https://http2.mlstatic.com/D_NQ_NP_2X_825330-MLA84549502716_052025-F.webp",
+  "https://http2.mlstatic.com/D_NQ_NP_2X_687328-MLA84841542561_052025-F.webp",
+  "https://http2.mlstatic.com/D_NQ_NP_2X_765755-MLA91874147887_092025-F.webp",
+  "https://http2.mlstatic.com/D_NQ_NP_2X_932200-MLA54147001786_032023-F.webp",
+  "https://http2.mlstatic.com/D_NQ_NP_2X_877725-MLA91889911583_092025-F.webp",
+  "https://http2.mlstatic.com/D_NQ_NP_2X_889337-MLA44330907885_122020-F.webp",
+  "https://http2.mlstatic.com/D_NQ_NP_2X_960924-MLA80524897786_112024-F.webp",
+  "https://http2.mlstatic.com/D_NQ_NP_2X_951706-MLA91873137435_092025-F.webp",
+  "https://m.media-amazon.com/images/I/81tR3RHeVgL._SL1500_.jpg",
+  "https://m.media-amazon.com/images/I/81-O2qPK7FL._SL1500_.jpg",
+  "https://m.media-amazon.com/images/I/81IHDcz6khL._SL1500_.jpg",
+  "https://m.media-amazon.com/images/I/71Ob-K-LHtL._SL1500_.jpg",
+  "https://m.media-amazon.com/images/I/71exlVssfYL._SL1500_.jpg",
+];

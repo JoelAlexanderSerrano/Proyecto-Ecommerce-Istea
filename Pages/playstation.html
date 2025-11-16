@@ -52,7 +52,7 @@
   <main class="productos">
     <h2>Productos Playstation</h2>
 
-    <!-- MUY IMPORTANTE → usamos el mismo ID que usa cards.js -->
+ 
     <div id="lista-productos" class="grid">
 
       <!-- PRODUCTO 1 -->
@@ -111,7 +111,6 @@
       </div>
 
     
-      
     </div>
   </main>
 
@@ -125,12 +124,10 @@
     </div>
   </footer>
 
-  <script type="module">
-    import { initCart } from "../JS/modules/cart.js";
-
-    // NO cargamos productos dinámicos porque esta página es estática
-    initCart();
-  </script>
+<script type="module">
+   import { initPlaystation } from "../JS/modules/playstation.js";
+   initPlaystation();
+</script>
 
 </body>
 </html>

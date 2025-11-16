@@ -1,14 +1,19 @@
-// modules/cards.js
+import { getProductos } from "./api.js"; // ⬅️ ¡Importa la función de api.js!
+
 export async function cargarProductos(filtroCategoria = null) {
+  
+  // 1. Llama a la función getProductos() de api.js
+  const productos = await getProductos(); 
 
-  const API_URL =
-    location.hostname === "localhost" || location.hostname === "127.0.0.1"
-      ? "/data/productos.json"
-      : "/api/productos";
+  // 2. Comprobación de errores (opcional pero útil)
+  if (!productos || productos.length === 0) {
+      console.error("No se pudieron cargar los productos. Revisar logs de Vercel.");
+      const contenedor = document.querySelector("#lista-productos");
+      if(contenedor) contenedor.innerHTML = "<p>Error al cargar productos o no hay productos.</p>";
+      return;
+  }
 
-  const res = await fetch(API_URL);
-  const productos = await res.json();
-
+  // A partir de aquí, el resto de tu código que maneja el DOM...
   const contenedor = document.querySelector("#lista-productos");
   if (!contenedor) return;
 
@@ -17,7 +22,8 @@ export async function cargarProductos(filtroCategoria = null) {
   let filtrados = filtroCategoria
     ? productos.filter(p => p.categoria === filtroCategoria)
     : productos;
-
+    
+  // ... (el resto del código HTML para renderizar las cards)
   filtrados.forEach(p => {
     contenedor.innerHTML += `
       <div class="card">
@@ -37,3 +43,4 @@ export async function cargarProductos(filtroCategoria = null) {
     `;
   });
 }
+

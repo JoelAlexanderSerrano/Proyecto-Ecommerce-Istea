@@ -1,4 +1,3 @@
-// cart.js
 export function initCart() {
   console.log("Cart inicializado");
 
@@ -7,11 +6,12 @@ export function initCart() {
 
   actualizarContador();
 
-  // Delegación de eventos para detectar clicks en cualquier botón "Agregar al carrito"
+  // Delegación para botones dinámicos
   document.addEventListener("click", (e) => {
-    if (e.target.classList.contains("btn-add-cart")) {
-      const id = e.target.dataset.id;
+    if (e.target.classList.contains("agregar") || 
+        e.target.classList.contains("btn-add-cart")) {
 
+      const id = e.target.dataset.id;
       agregarProducto(id);
       actualizarContador();
 
@@ -20,6 +20,7 @@ export function initCart() {
     }
   });
 
+  // Agregar al carrito
   function agregarProducto(id) {
     const item = carrito.find(p => p.id == id);
 
@@ -32,6 +33,7 @@ export function initCart() {
     localStorage.setItem("carrito", JSON.stringify(carrito));
   }
 
+  // Actualizar contador
   function actualizarContador() {
     if (!contador) return;
     const total = carrito.reduce((acc, p) => acc + p.cantidad, 0);

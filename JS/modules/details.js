@@ -1,43 +1,55 @@
-// details.js
-export function initDetails() {
-  const contenedor = document.querySelector("#detalle");
-  if (!contenedor) return; // No estamos en la página de detalles
+import { getProductoById } from "./api.js";
 
-  cargarDetalle();
-}
+export async function initDetails() {
+    const contenedor = document.querySelector("#detalle");
 
-async function cargarDetalle() {
-  const params = new URLSearchParams(location.search);
-  const id = params.get("id");
+    // --- Obtener ID de la URL ---
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get("id");
 
-  if (!id) return;
+    if (!id) {
+        contenedor.innerHTML = "<p>Error: No se especificó un producto.</p>";
+        return;
+    }
 
-  // Ruta dinámica según entorno (localhost / producción)
-  const API_URL =
-    location.hostname === "localhost" || location.hostname === "127.0.0.1"
-      ? "/data/productos.json"
-      : "/api/productos";
+    // --- Obtener producto desde API ---
+    try {
+        const producto = await getProductoById(id);
 
-  const res = await fetch(API_URL);
-  const productos = await res.json();
-  const prod = productos.find((p) => p.id == id);
+        if (!producto) {
+            contenedor.innerHTML = "<p>Error: Producto no encontrado.</p>";
+            return;
+        }
 
-  if (!prod) {
-    document.querySelector("#detalle").innerHTML =
-      "<p>Producto no encontrado.</p>";
-    return;
-  }
+        // --- Render del detalle ---
+        contenedor.innerHTML = `
+            <div class="detalle-container">
+                
+                <div class="detalle-img">
+                    <img src="${producto.imagen}" alt="${producto.nombre}">
+                </div>
 
-  document.querySelector("#detalle").innerHTML = `
-    <div class="detalle-producto">
-      <h1>${prod.nombre}</h1>
-      <img src="${prod.imagen}" alt="${prod.nombre}">
-      <p>${prod.descripcion}</p>
-      <strong>$${prod.precio}</strong>
+                <div class="detalle-info">
+                    <h2>${producto.nombre}</h2>
 
-      <button class="btn-add-cart" data-id="${prod.id}">
-        Agregar al carrito
-      </button>
-    </div>
-  `;
+                    <p class="detalle-precio">$${producto.precio}</p>
+
+                    <p class="detalle-descripcion">
+                        ${producto.descripcion}
+                    </p>
+
+                    <button class="btn agregar" data-id="${producto.id}">
+                        Agregar al carrito
+                    </button>
+
+                    <a href="index.html" class="btn volver">Volver</a>
+                </div>
+
+            </div>
+        `;
+
+    } catch (error) {
+        console.error("Error cargando producto:", error);
+        contenedor.innerHTML = "<p>Error al cargar los datos del producto.</p>";
+    }
 }

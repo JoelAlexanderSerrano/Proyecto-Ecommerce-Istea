@@ -1,9 +1,25 @@
-<div id="detalle"></div>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Productos</title>
+    <link rel="stylesheet" href="../CSS/style.css">
+</head>
+<body>
+
+    <h1 class="titulo">Productos</h1>
+
+    <!-- Contenedor donde productos.js cargará la lista -->
+    <section id="productos" class="lista-productos">
+        Cargando productos...
+    </section>
 
 <script type="module">
-  import { cargarDetalle } from "../JS/modules/details.js";
-  import { initCart } from "../JS/modules/cart.js";
-
-  cargarDetalle();
-  initCart();
+   import { initProductos } from "../JS/modules/productos.js";
+   initProductos();
 </script>
+
+
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalle del Producto</title>
+    <link rel="stylesheet" href="../CSS/style.css">
+</head>
+<body>
+
+    <a href="./producto.html" class="volver">← Volver a productos</a>
+
+    <!-- Aquí details.js inserta el producto -->
+    <main id="detalle" class="detalle-producto" style="padding: 20px;">
+        Cargando producto...
+    </main>
+
+    <script type="module">
+        import { initDetails } from "../JS/modules/details.js";
+        initDetails();
+    </script>
+
+</body>
+</html>
