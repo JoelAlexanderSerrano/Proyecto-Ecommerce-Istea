@@ -1,0 +1,26 @@
+[
+  {
+    "id": "1",
+    "nombre": "PlayStation 5",
+    "descripcion": "Consola PS5 Edición Estándar",
+    "precio": 850000,
+    "imagen": "https://m.media-amazon.com/images/I/615q9SpEdhL._SL1500_.jpg",
+    "categoria": "Playstation"
+  },
+  {
+    "id": "2",
+    "nombre": "Xbox Series X",
+    "descripcion": "Consola Xbox Series X 1TB",
+    "precio": 780000,
+    "imagen": "https://m.media-amazon.com/images/I/615KnbjRmTL._SL1500_.jpg",
+    "categoria": "Xbox"
+  },
+  {
+    "id": "3",
+    "nombre": "Nintendo Switch OLED",
+    "descripcion": "Modelo OLED - Nuevo",
+    "precio": 520000,
+    "imagen": "https://m.media-amazon.com/images/I/81tR3RHeVgL._SL1500_.jpg",
+    "categoria": "Nintendo"
+  }
+]
