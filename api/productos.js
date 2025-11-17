@@ -20,7 +20,7 @@ export default async function handler(req, res) {
                 nombre: record.fields.Nombre,
                 descripcion: record.fields.Descripcion,
                 precio: record.fields.Precio,
-                imagen: record.fields.Imagen ? record.fields.Imagen[0].url : ""
+                imagen: record.fields.URL_Imagen ? record.fields.URL_Imagen[0].url : ""
             });
         } catch (error) {
             return res.status(404).json({ error: "Producto no encontrado" });
