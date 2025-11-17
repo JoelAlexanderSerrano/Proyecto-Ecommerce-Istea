@@ -2,11 +2,9 @@ import Airtable from "airtable";
 
 export default async function handler(req, res) {
     
-    // ⬇️ SOLUCIÓN SIMPLIFICADA PARA CORS ⬇️
-    // Esto debería ser suficiente para permitir el acceso desde tu Live Server
     res.setHeader('Access-Control-Allow-Origin', '*'); 
     res.setHeader('Access-Control-Allow-Methods', 'GET');
-    // ⬆️ FIN DEL BLOQUE CORS ⬆️
+}
 
     const base = new Airtable({ apiKey: process.env.AIRTABLE_API_KEY })
         .base(process.env.AIRTABLE_BASE_ID);
@@ -28,20 +26,30 @@ export default async function handler(req, res) {
     }
 
     // LISTA
-    try {
-        const records = await base('Productos').select().all();
+   const { categoria } = req.query;
 
-        const productos = records.map(record => ({
-            id: record.id,
-            nombre: record.fields.Nombre,
-            descripcion: record.fields.Descripcion,
-            precio: record.fields.Precio,
-            imagen: record.fields.URL_Imagen || "",
-        }));
+try {
+    let query = base('Productos').select(); 
 
-        res.json(productos);
-    } catch (error) {
-        console.error("Error al obtener productos de Airtable:", error);
-        res.status(500).json({ error: "Fallo al conectar con la base de datos." });
+    if (categoria) {
+
+        const formula = `FIND(LOWER('${categoria}'), LOWER({Categoria}))`;
+        query = query.filterByFormula(formula);
     }
+    
+    const records = await query.all();
+
+    
+    const productos = records.map(record => ({
+        id: record.id,
+        nombre: record.fields.Nombre,
+        descripcion: record.fields.Descripcion,
+        precio: record.fields.Precio,
+        imagen: record.fields.URL_Imagen || "", // Usamos el campo directo de URL
+    }));
+
+    res.json(productos);
+} catch (error) {
+    console.error("Error al obtener productos de Airtable:", error);
+    res.status(500).json({ error: "Fallo al conectar con la base de datos." });
 }

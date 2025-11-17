@@ -1,7 +1,13 @@
 import { getProductoById } from "./api.js";
 
 export async function initDetails() {
+    
     const contenedor = document.querySelector("#detalle");
+    if (!contenedor) {
+        // Si no estamos en la página de detalle, salimos de la función sin error.
+        return; 
+    }
+    // ----------------------------------------------------
 
     // --- Obtener ID de la URL ---
     const params = new URLSearchParams(window.location.search);
@@ -16,17 +22,23 @@ export async function initDetails() {
     try {
         const producto = await getProductoById(id);
 
-        if (!producto) {
+        // Si la API devuelve null/undefined o un objeto de error
+        if (!producto || producto.error) {
             contenedor.innerHTML = "<p>Error: Producto no encontrado.</p>";
             return;
         }
+
+        // 🚨 MEJORA: Fallback para la URL de la imagen 🚨
+        const imagenSrc = producto.imagen && producto.imagen.length > 0 
+            ? producto.imagen 
+            : './Images/placeholder.png'; 
 
         // --- Render del detalle ---
         contenedor.innerHTML = `
             <div class="detalle-container">
                 
                 <div class="detalle-img">
-                    <img src="${producto.imagen}" alt="${producto.nombre}">
+                    <img src="${imagenSrc}" alt="${producto.nombre}">
                 </div>
 
                 <div class="detalle-info">
