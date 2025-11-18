@@ -1,3 +1,9 @@
+/*
+====================================
+ 1. RESET Y ESTRUCTURA GENERAL
+====================================
+*/
+
 /* Reset */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -15,13 +21,23 @@ body {
   color: #333;
 }
 
+/* Contenedor principal que centra y permite el Sticky Footer */
 .content-wrapper {
-  flex-grow: 1;
+  flex-grow: 1; /* Ocupa el espacio restante para empujar el footer */
   display: flex;
   flex-direction: column;
+  max-width: 1200px; 
+  width: 100%;
+  margin: 0 auto;
 }
 
-/* ===== HEADER ===== */
+
+/*
+====================================
+ 2. HEADER Y NAVEGACIÓN (Desktop)
+====================================
+*/
+
 header {
   display: flex;
   align-items: center;
@@ -33,17 +49,18 @@ header {
   flex-wrap: wrap;
 }
 
-/* Logo */
+/* Logo (Regla consolidada para mantener width: 120px y object-fit: cover) */
 .logo img {
-  max-width: 120px;
-  height: auto;
+  width: 120px;
+  height: 120px;
   display: block;
   border-radius: 50%;
+  object-fit: cover;
 }
 
 /* Search */
 .search-bar {
-  flex: 1 1 420px;            /* crece pero tiene un mínimo razonable */
+  flex: 1 1 420px; /* crece pero tiene un mínimo razonable */
   display: flex;
   justify-content: center;
   gap: 6px;
@@ -72,13 +89,16 @@ header {
 
 .search-bar button:hover { background: #e67e22; }
 
-/* Menu / Navbar */
+/* Menu / Navbar (Consolidado el margin-right) */
 .menu-icon { display: none; cursor: pointer; font-size: 28px; color: white; background: none; border: none; padding: 6px 8px; }
 
 #menu-toggle { display: none; } /* checkbox hide */
 
 /* Desktop: horizontal menu */
-.navbar { flex: 0 1 auto; }
+.navbar { 
+  flex: 0 1 auto; 
+  margin-right: 80px; /* Mantenido del código duplicado */
+}
 .menu {
   list-style: none;
   display: flex;
@@ -110,7 +130,7 @@ header {
 .dropdown-content {
   display: none;
   position: absolute;
-  top: calc(100% + 6px);
+  top: 100%; /* Ajustado de calc(100% + 6px) a 100% para simplificar */
   left: 0;
   background: #222;
   min-width: 160px;
@@ -133,13 +153,14 @@ header {
   .dropdown:hover .dropdown-content { display: block; }
 }
 
-/* carrito */
-.carrito { font-size: 1.5rem; 
-cursor: pointer; 
-color: white; 
-padding: 6px; 
-margin-right: 80px;
-position: relative;
+/* carrito (Regla consolidada para mantener margin-right: 80px y position: relative) */
+.carrito { 
+  font-size: 1.5rem; 
+  cursor: pointer; 
+  color: white; 
+  padding: 6px; 
+  margin-right: 80px;
+  position: relative;
 }
 
 /* Contador carrito */
@@ -158,20 +179,25 @@ position: relative;
   line-height: 1.2;
 }
 
-/* ====== RESPONSIVE (mobile) ====== */
+
+/*
+====================================
+ 3. RESPONSIVE (Mobile)
+====================================
+*/
+
 @media (max-width: 768px) {
   /* organiza el header en columnas: el orden se controla con el flujo HTML */
   header { 
     padding: 10px 14px; 
+    max-width: none; /* Asegura que el header ocupe todo el ancho en mobile */
+    margin: 0;
   }
 
   /* mostrar el icono hamburguesa */
-  .menu-icon { 
-    display: block; 
-    order: 2; 
-  }
-
-  /* ocultar el banner en mobile */
+  .menu-icon { display: block; order: 2; }
+  
+  /* ocultar el banner en mobile (Regla original) */
   .banner {
     display: none;
   }
@@ -187,193 +213,21 @@ position: relative;
   .search-bar button { border-radius: 0 25px 25px 0; }
 
   /* nav ocupa 100% y el ul está oculto por defecto */
-  .navbar { order: 4; width: 100%; }
+  .navbar { order: 4; width: 100%; margin-right: 0; }
   .menu {
-    display: none;               /* oculto por defecto en mobile */
+    display: none; /* oculto por defecto en mobile */
     flex-direction: column;
     gap: 0;
     background: #111;
     width: 100%;
   }
-
-  /* al activar el checkbox, mostramos el menú (checkbox + label + nav en ese orden) */
-  #menu-toggle:checked + .menu-icon + .navbar .menu {
-    display: flex;
-  }
-
-  .menu > li > a {
-    padding: 14px 18px;
-    border-bottom: 1px solid #222;
-    text-align: left;
-  }
-
-  /* Submenu: posicion estática dentro del flujo */
-  .dropdown-content {
-    position: static;
-    display: none;
-    box-shadow: none;
-    border-radius: 0;
-    background: #222;
-  }
-
-  /* abrir submenú cuando el enlace dentro recibe focus o cuando se toca (tap) */
-  .dropdown:focus-within .dropdown-content { display: flex; flex-direction: column; }
-
-  /* Asegura que el carrito quede visible y alineado al final */
-  .carrito { order: 5; margin-top: 6px; }
-}
-
-/* ===== HEADER ===== */
-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background-color: #1c1c1c;
-  padding: 10px 24px;
-  border-bottom: 3px solid white;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-
-/* Logo */
-.logo img {
-  width: 120px;
-  height: 120px;
-  display: block;
-  border-radius: 50%;
-  object-fit: cover;
-}
-
-/* Search */
-.search-bar {
-  flex: 1 1 420px;            /* crece pero tiene un mínimo razonable */
-  display: flex;
-  justify-content: center;
-  gap: 6px;
-  min-width: 200px;
-}
-
-.search-bar input {
-  width: 100%;
-  max-width: 640px;
-  padding: 10px 12px;
-  border-radius: 25px 0 0 25px;
-  border: none;
-  outline: none;
-  font-size: 14px;
-}
-
-.search-bar button {
-  padding: 10px 14px;
-  border-radius: 0 25px 25px 0;
-  border: none;
-  background: #f39c12;
-  color: white;
-  cursor: pointer;
-  font-size: 16px;
-}
-
-.search-bar button:hover { background: #e67e22; }
-
-/* Menu / Navbar */
-.menu-icon { display: none; cursor: pointer; font-size: 28px; color: white; background: none; border: none; padding: 6px 8px; }
-
-#menu-toggle { display: none; } /* checkbox hide */
-
-/* Desktop: horizontal menu */
-.navbar { flex: 0 1 auto; 
-margin-right: 80px;
-}
-.menu {
-  list-style: none;
-  display: flex;
-  gap: 18px;
-  margin: 0;
-  padding: 0;
-  align-items: center;
-  background: #111;
-  border-radius: 6px;
-  overflow: visible;
-}
-
-.menu > li { position: relative; }
-.menu > li > a {
-  display: block;
-  padding: 12px 18px;
-  color: white;
-  text-decoration: none;
-  font-weight: bold;
-  white-space: nowrap;
-}
-
-.menu > li > a:hover {
-  background: #ff9800;
-  border-radius: 5px;
-}
-
-/* Submenu */
-.dropdown-content {
-  display: none;
-  position: absolute;
-  top: 100%;
-  left: 0;
-  background: #222;
-  min-width: 160px;
-  border-radius: 6px;
-  box-shadow: 0 6px 14px rgba(0,0,0,0.4);
-  z-index: 99;
-}
-
-.dropdown-content li { display: block; }
-.dropdown-content li a {
-  display: block;
-  padding: 10px 14px;
-  color: #fff;
-  text-decoration: none;
-}
-.dropdown-content li a:hover { background: #ff9800; color: #000; }
-
-/* hover en desktop */
-@media (hover: hover) and (min-width: 769px) {
-  .dropdown:hover .dropdown-content { display: block; }
-}
-
-/* carrito */
-.carrito { font-size: 1.5rem; cursor: pointer; color: white; padding: 6px;}
-
-/* ====== RESPONSIVE (mobile) ====== */
-@media (max-width: 768px) {
-  /* organiza el header en columnas: el orden se controla con el flujo HTML */
-  header { padding: 10px 14px; }
-
-  /* mostrar el icono hamburguesa */
-  .menu-icon { display: block; order: 2; }
-
+  
+  /* Clase inyectada por JS para abrir el menú */
   .menu.menu-open {
-  display: flex !important;
-}
-
-  /* search se va en su propia fila y ocupa 100% */
-  .search-bar {
-    order: 3;
-    width: 100%;
-    justify-content: stretch;
-    padding: 6px 0;
-  }
-  .search-bar input { border-radius: 25px 0 0 25px; width: 100%; }
-  .search-bar button { border-radius: 0 25px 25px 0; }
-
-  /* nav ocupa 100% y el ul está oculto por defecto */
-  .navbar { order: 4; width: 100%; }
-  .menu {
-    display: none;               /* oculto por defecto en mobile */
-    flex-direction: column;
-    gap: 0;
-    background: #111;
-    width: 100%;
+    display: flex !important;
   }
 
-  /* al activar el checkbox, mostramos el menú (checkbox + label + nav en ese orden) */
+  /* al activar el checkbox, mostramos el menú (regla redundante si se usa JS/menu-open, pero mantenida) */
   #menu-toggle:checked + .menu-icon + .navbar .menu {
     display: flex;
   }
@@ -397,12 +251,18 @@ margin-right: 80px;
   .dropdown:focus-within .dropdown-content { display: flex; flex-direction: column; }
 
   /* Asegura que el carrito quede visible y alineado al final */
-  .carrito { order: 5; margin-top: 6px; }
+  .carrito { order: 5; margin-top: 6px; margin-right: 0;}
 }
+
+/*
+====================================
+ 4. SECCIONES DE CONTENIDO
+====================================
+*/
 
 /* ===== SECCIÓN PRODUCTOS ===== */
 .productos {
- padding: 50px 24px;
+  padding: 50px 24px;
   text-align: center;
   background: #f8f8f8;
 }
@@ -414,7 +274,7 @@ margin-right: 80px;
   text-transform: uppercase;
 }
 
-/* 🚨 REGLA CLAVE PARA EL LAYOUT DE COLUMNAS 🚨 */
+/* REGLA CLAVE PARA EL LAYOUT DE COLUMNAS */
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -427,7 +287,6 @@ margin-right: 80px;
   border-radius: 14px;
   box-shadow: 0 6px 16px rgba(0,0,0,0.12);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  /* Asegura altura mínima para estabilidad */
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -469,7 +328,7 @@ margin-right: 80px;
   cursor: pointer;
   font-weight: bold;
   transition: background 0.2s ease;
-  margin-top: 10px; /* Separación del precio */
+  margin-top: 10px;
 }
 
 .producto button:hover {
@@ -523,6 +382,8 @@ margin-right: 80px;
   height: 100%;
   border-radius: 12px;
   display: block;
+  /* El object-fit: cover aquí depende si las imágenes son de distintos tamaños, 
+  pero para sliders se recomienda usar cover o fill para que encajen */
 }
 
 /* Botones */
@@ -571,7 +432,7 @@ margin-right: 80px;
   background: #ff9800;
 }
 
-/* Responsive */
+/* Responsive Banner */
 @media (max-width: 768px) {
   .banner { height: 300px; }
   .prev, .next { font-size: 1.5rem; padding: 6px 10px; }
@@ -666,12 +527,25 @@ margin-right: 80px;
 }
 
 
-/* ===== FOOTER ===== */
+/*
+====================================
+ 5. FOOTER (Solución final de alineación)
+====================================
+*/
+
+/* FOOTER EXTERNO: Ancho de borde a borde y color de fondo */
 footer {
- background: #111;
-    color: #eee;
-    padding: 20px 10px;
-    text-align: center;
+  background: #111;
+  color: #eee;
+  padding: 20px 10px;
+  width: 100%; /* CLAVE: La barra negra debe ocupar el 100% de la ventana */
+}
+
+/* FOOTER INTERNO: Limita el ancho y centra el texto/enlaces */
+.footer-content {
+  max-width: 1200px; /* Igual que el content-wrapper */
+  margin: 0 auto;
+  text-align: center;
 }
 
 footer p {
@@ -690,291 +564,302 @@ footer .socials a:hover {
   text-decoration: underline;
 }
 
-/* AJUSTES AL ENCABEZADO EXISTENTE */
+
+/*
+====================================
+ 6. PÁGINAS ADMINISTRATIVAS Y LOGIN
+====================================
+*/
+
+/* Ajustes al encabezado existente */
 header.admin-header {
-    /* Mantiene las reglas de fondo #1c1c1c y padding */
-    justify-content: space-between; /* Alinea logo y botón */
-    align-items: center;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .admin-title {
-    /* Estilo del título principal del panel */
-    color: white;
-    font-size: 1.6rem;
-    flex-grow: 1; /* Permite que el título ocupe espacio central */
-    text-align: center;
-    margin: 0 20px;
+  color: white;
+  font-size: 1.6rem;
+  flex-grow: 1;
+  text-align: center;
+  margin: 0 20px;
 }
 
 /* Estilo para el botón "Volver a la Tienda" (usando .btn-buscar como base) */
 .btn-volver {
-    background: #f39c12; /* Naranja principal */
-    color: white;
-    padding: 10px 15px;
-    border-radius: 6px;
-    text-decoration: none;
-    font-weight: bold;
-    white-space: nowrap;
+  background: #f39c12;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: bold;
+  white-space: nowrap;
 }
 
-/* ESTILOS DE LA SECCIÓN PRINCIPAL */
+/* ESTILOS DE LA SECCIÓN PRINCIPAL ADMIN */
 .admin-main {
-    padding: 30px 24px;
-    width: 600px;
-    margin: 0 auto; /* Centra el contenido */
-    background: #fff;
-    border-radius: 14px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-    margin-top: 20px;
+  padding: 30px 24px;
+  width: 600px;
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  margin-top: 20px;
 }
 
 /* Estilo para el botón de "Crear Nuevo Producto" */
 #btn-nuevo-producto {
-    background: #4CAF50; /* Verde para crear */
-    color: white;
-    border: none;
-    padding: 12px 20px;
-    border-radius: 8px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background 0.3s;
+  background: #4CAF50;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s;
 }
 
 /* ESTILOS DEL FORMULARIO */
 .form-crud {
-    margin-bottom: 40px;
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    display: block; /* Muestra el formulario por defecto, ajusta con JS para ocultarlo */
+  margin-bottom: 40px;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  display: block;
 }
 
 .formulario-admin label {
-    display: block;
-    margin-top: 15px;
-    margin-bottom: 5px;
-    font-weight: bold;
-    color: #333;
+  display: block;
+  margin-top: 15px;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #333;
 }
 
 .formulario-admin input[type="text"],
 .formulario-admin input[type="number"],
 .formulario-admin textarea {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    font-size: 1rem;
-    box-sizing: border-box;
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  box-sizing: border-box;
 }
 
 .form-actions {
-    margin-top: 25px;
-    display: flex;
-    gap: 15px;
+  margin-top: 25px;
+  display: flex;
+  gap: 15px;
 }
 
 .btn-guardar {
-    background: #ff9800; /* Naranja (Guardar) */
-    color: white;
-    border: none;
-    padding: 10px 16px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: background 0.2s;
+  background: #ff9800;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.2s;
 }
 
 .btn-cancelar {
-    background: #bbb; /* Gris (Cancelar) */
-    color: #333;
-    border: none;
-    padding: 10px 16px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: background 0.2s;
+  background: #bbb;
+  color: #333;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.2s;
 }
 
 /* ESTILOS DE LA TABLA */
 .tabla-admin {
-    width: 100%;
-    border-collapse: collapse; /* Elimina espacios entre celdas */
-    margin-top: 20px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    background: white;
-    border-radius: 8px;
-    overflow: hidden; /* Para que el border-radius funcione */
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
 }
 
 .tabla-admin th {
-    background-color: #1c1c1c; /* Fondo oscuro del header */
-    color: white;
-    padding: 12px 15px;
-    text-align: left;
-    font-weight: bold;
-    text-transform: uppercase;
-    font-size: 0.85rem;
+  background-color: #1c1c1c;
+  color: white;
+  padding: 12px 15px;
+  text-align: left;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 0.85rem;
 }
 
 .tabla-admin td {
-    padding: 10px 15px;
-    border-bottom: 1px solid #eee;
-    font-size: 0.95rem;
-    vertical-align: middle;
+  padding: 10px 15px;
+  border-bottom: 1px solid #eee;
+  font-size: 0.95rem;
+  vertical-align: middle;
 }
 
 .tabla-admin tr:hover {
-    background-color: #f7f7f7;
+  background-color: #f7f7f7;
 }
 
 /* BOTONES DE ACCIÓN DENTRO DE LA TABLA */
 .btn-editar, .btn-eliminar {
-    border: none;
-    padding: 6px 10px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 0.8rem;
-    margin-right: 5px;
-    font-weight: bold;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  margin-right: 5px;
+  font-weight: bold;
 }
 
 .btn-editar {
-    background: #f39c12; /* Naranja */
-    color: white;
+  background: #f39c12;
+  color: white;
 }
 
 .btn-eliminar {
-    background: #e74c3c; /* Rojo (Peligro) */
-    color: white;
+  background: #e74c3c;
+  color: white;
 }
 
 /* ===== ESTILOS PARA EL LOGIN ===== */
 .login-main {
-    flex-grow: 1; /* Ocupa el espacio restante */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 50px 24px;
-    background: #f4f4f4;
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 50px 24px;
+  background: #f4f4f4;
 }
 
 .login-card {
-    background: white;
-    padding: 40px;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    max-width: 400px;
-    width: 100%;
-    text-align: center;
+  background: white;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
 }
 
 .login-card h2 {
-    font-size: 1.8rem;
-    margin-bottom: 30px;
-    color: #333;
+  font-size: 1.8rem;
+  margin-bottom: 30px;
+  color: #333;
 }
 
 .login-card label {
-    display: block;
-    text-align: left;
-    margin-top: 15px;
-    margin-bottom: 5px;
-    font-weight: bold;
+  display: block;
+  text-align: left;
+  margin-top: 15px;
+  margin-bottom: 5px;
+  font-weight: bold;
 }
 
 .login-card input[type="text"],
 .login-card input[type="password"] {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    font-size: 1rem;
-    box-sizing: border-box;
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  box-sizing: border-box;
 }
 
 .btn-login {
-    width: 100%;
-    background: #ff9800; /* Naranja principal */
-    color: white;
-    border: none;
-    padding: 12px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 1.1rem;
-    margin-top: 25px;
-    transition: background 0.2s;
+  width: 100%;
+  background: #ff9800;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1.1rem;
+  margin-top: 25px;
+  transition: background 0.2s;
 }
 
 .error-message {
-    color: #e74c3c; /* Rojo de error */
-    margin-top: 10px;
-    font-weight: bold;
+  color: #e74c3c;
+  margin-top: 10px;
+  font-weight: bold;
 }
+
+/*
+====================================
+ 7. PÁGINAS ESPECÍFICAS (DETALLE, CARRITO)
+====================================
+*/
 
 /* ===== ESTILOS PARA DETALLE DE PRODUCTO (producto.html) ===== */
 .detalle-producto-main {
-    padding: 60px 24px;
-    max-width: 1000px;
-    margin: 0 auto;
+  padding: 60px 24px;
+  max-width: 1000px;
+  margin: 0 auto;
 }
 
 .detalle-card {
-    display: flex;
-    gap: 40px;
-    background: white;
-    padding: 30px;
-    border-radius: 14px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  display: flex;
+  gap: 40px;
+  background: white;
+  padding: 30px;
+  border-radius: 14px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
 .detalle-imagen {
-    flex-basis: 40%;
-    max-width: 400px;
+  flex-basis: 40%;
+  max-width: 400px;
 }
 
 .detalle-imagen img {
-    width: 100%;
-    max-height: 400px;
-    object-fit: contain;
-    border-radius: 10px;
+  width: 100%;
+  max-height: 400px;
+  object-fit: contain;
+  border-radius: 10px;
 }
 
 .detalle-info {
-    flex-basis: 60%;
+  flex-basis: 60%;
 }
 
 .detalle-info h1 {
-    font-size: 2.5rem;
-    margin-bottom: 10px;
+  font-size: 2.5rem;
+  margin-bottom: 10px;
 }
 
 .detalle-info .descripcion-completa {
-    font-size: 1.1rem;
-    line-height: 1.7;
-    color: #555;
-    margin-bottom: 25px;
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: #555;
+  margin-bottom: 25px;
 }
 
 .detalle-info .precio {
-    font-size: 2rem;
-    color: #6afd6a; /* Color destacado */
-    font-weight: bold;
-    margin-bottom: 20px;
+  font-size: 2rem;
+  color: #6afd6a;
+  font-weight: bold;
+  margin-bottom: 20px;
 }
 
 /* Botón de compra en el detalle */
 .btn-comprar {
-    background: #ff9800; 
-    border: none;
-    color: white;
-    padding: 15px 30px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 1.2rem;
-    transition: background 0.2s ease;
+  background: #ff9800; 
+  border: none;
+  color: white;
+  padding: 15px 30px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1.2rem;
+  transition: background 0.2s ease;
 }
 
 @media (max-width: 768px) {
@@ -988,115 +873,113 @@ header.admin-header {
 
 /* ===== ESTILOS PARA EL CARRITO (carrito.html) ===== */
 .carrito-main {
-    padding: 40px 24px;
-    max-width: 1200px;
-    margin: 0 auto;
+  padding: 40px 24px;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .carrito-contenido {
-    /* Usa Flexbox para colocar la tabla al lado del resumen */
-    display: flex;
-    gap: 30px;
-    flex-wrap: wrap; 
-    margin-top: 30px;
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap; 
+  margin-top: 30px;
 }
 
 .carrito-lista {
-    flex-grow: 1; /* Permite que la tabla ocupe el mayor espacio posible */
-    min-width: 65%; 
+  flex-grow: 1;
+  min-width: 65%; 
 }
 
 /* --- TABLA DE PRODUCTOS --- */
 .tabla-carrito {
-    width: 100%;
-    border-collapse: collapse;
-    background: white;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    border-radius: 8px;
-    overflow: hidden; 
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  border-radius: 8px;
+  overflow: hidden; 
 }
 
 .tabla-carrito th, .tabla-carrito td {
-    padding: 12px 15px;
-    border-bottom: 1px solid #eee;
-    text-align: left;
+  padding: 12px 15px;
+  border-bottom: 1px solid #eee;
+  text-align: left;
 }
 
 .tabla-carrito th {
-    background-color: #f8f8f8;
-    font-weight: bold;
-    text-transform: uppercase;
-    font-size: 0.85rem;
-    color: #333;
+  background-color: #f8f8f8;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  color: #333;
 }
 
 .tabla-carrito tr:last-child td {
-    border-bottom: none;
+  border-bottom: none;
 }
 
 /* --- CONTROLES DE LA TABLA --- */
 .input-cantidad {
-    width: 55px;
-    padding: 5px;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-    text-align: center;
-    font-size: 0.9rem;
+  width: 55px;
+  padding: 5px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  text-align: center;
+  font-size: 0.9rem;
 }
 
 /* Botón de eliminar producto */
 .btn-quitar {
-    background: none;
-    border: none;
-    color: #e74c3c; /* Rojo de peligro */
-    cursor: pointer;
-    font-size: 1.2rem;
-    transition: color 0.2s;
+  background: none;
+  border: none;
+  color: #e74c3c;
+  cursor: pointer;
+  font-size: 1.2rem;
+  transition: color 0.2s;
 }
 
 .btn-quitar:hover {
-    color: #c0392b;
+  color: #c0392b;
 }
 
 /* --- RESUMEN DEL PEDIDO (La caja lateral) --- */
 .carrito-resumen {
-    flex-basis: 300px; /* Ancho fijo para el resumen */
-    background: white;
-    padding: 25px;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-    height: fit-content; /* Se ajusta al contenido */
-    /* Asegura que no se pegue al borde superior si la tabla es corta */
-    position: sticky; 
-    top: 20px; 
+  flex-basis: 300px;
+  background: white;
+  padding: 25px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  height: fit-content;
+  position: sticky; 
+  top: 20px; 
 }
 
 .carrito-resumen h3 {
-    font-size: 1.4rem;
-    margin-bottom: 20px;
-    color: #1c1c1c;
+  font-size: 1.4rem;
+  margin-bottom: 20px;
+  color: #1c1c1c;
 }
 
 .resumen-detalle p, .resumen-detalle h4 {
-    display: flex;
-    justify-content: space-between;
-    padding: 8px 0;
-    border-bottom: 1px solid #eee;
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid #eee;
 }
 
 .resumen-detalle h4 {
-    font-size: 1.3rem;
-    color: #1c1c1c;
-    margin-top: 15px;
-    border-bottom: none;
+  font-size: 1.3rem;
+  color: #1c1c1c;
+  margin-top: 15px;
+  border-bottom: none;
 }
 
-/* Botones de acción final (usa los estilos .btn-guardar y .btn-cancelar existentes) */
+/* Botones de acción final */
 #btn-vaciar, #btn-checkout {
-    width: 100%;
-    margin-top: 15px;
-    padding: 12px;
-    border-radius: 8px;
-    border: none;
-    font-weight: bold;
+  width: 100%;
+  margin-top: 15px;
+  padding: 12px;
+  border-radius: 8px;
+  border: none;
+  font-weight: bold;
 }

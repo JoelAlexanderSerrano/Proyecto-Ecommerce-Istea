@@ -1,41 +1,40 @@
-import { getProductos } from "./api.js";
+import { inicializarLocalStorage, getProductosLocal } from './datos.js'; 
 
-// Límite constante para productos destacados
 const LIMITE_DESTACADOS = 5; 
 
-export async function cargarProductos(filtroCategoria = null) {
+export function cargarProductos(filtroCategoria = null) {
   
-  const productos = await getProductos(); 
-
-  if (!productos || productos.length === 0) {
-      console.error("No se pudieron cargar los productos.");
-      const contenedor = document.querySelector("#lista-productos");
-      if(contenedor) contenedor.innerHTML = "<p>Error al cargar productos o no hay productos.</p>";
-      return;
-  }
-
+  
+  const productos = getProductosLocal(); 
   const contenedor = document.querySelector("#lista-productos");
-  if (!contenedor) return;
 
+  if (!contenedor) return;
   contenedor.innerHTML = "";
 
-  let filtrados = filtroCategoria
-    ? productos.filter(p => p.categoria === filtroCategoria)
-    : productos;
-    
-  // 🚨 1. Limitar el array a 5 elementos 🚨
-  let destacados = filtrados.slice(0, LIMITE_DESTACADOS);
   
-  let htmlContent = ''; 
+  let productosAMostrar;
 
-  destacados.forEach(p => {
-    // ⚠️ Fallback para la imagen: si Airtable no devuelve la URL, usa un placeholder local
+  if (filtroCategoria) {
+      
+      productosAMostrar = productos.filter(p => p.categoria === filtroCategoria);
+  } else {
+      
+      productosAMostrar = productos.slice(0, LIMITE_DESTACADOS);
+  }
+  
+  if (!productosAMostrar || productosAMostrar.length === 0) {
+      contenedor.innerHTML = `<p>No se encontraron productos para ${filtroCategoria || 'Destacados'}.</p>`;
+      return;
+  }
+  
+  
+  let htmlContent = productosAMostrar.map(p => {
+    
     const imagenSrc = p.imagen.length > 0 ? p.imagen : './Images/placeholder.png'; 
 
-    // 🚨 2. Usar la clase .producto y eliminar la descripción 🚨
-    htmlContent += `
+    return `
       <div class="producto"> 
-        <img src="${imagenSrc}" alt="${p.nombre}"> 
+        <img src="${imagenSrc}" alt="${p.nombre}">
         <h3>${p.nombre}</h3>
         
         <p class="precio">$${p.precio}</p> 
@@ -49,7 +48,7 @@ export async function cargarProductos(filtroCategoria = null) {
         </a>
       </div>
     `;
-  });
+  }).join("");
 
   contenedor.innerHTML = htmlContent;
 }

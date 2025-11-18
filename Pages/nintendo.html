@@ -26,23 +26,29 @@
     <input type="checkbox" id="menu-toggle" />
     <label for="menu-toggle" class="menu-icon" aria-hidden="true">☰</label>
 
-    <nav class="navbar">
-      <ul class="menu">
+<nav class="navbar">
+    <ul class="menu">
         <li><a href="../index.html">Inicio</a></li>
-        <li class="dropdown">  
-          <a href="#">Joysticks ▾</a>
-          <ul class="dropdown-content">
-            <li><a href="playstation.html">Playstation</a></li>
-            <li><a href="xbox.html">Xbox</a></li>
-            <li><a href="nintendo.html">Nintendo</a></li>
-            <li><a href="retro.html">Retro</a></li>
-            <li><a href="arcade.html">Arcade</a></li>
-          </ul>
+        <li class="dropdown">
+            <a href="#">Joysticks ▾</a>
+            <ul class="dropdown-content">
+                <li><a href="playstation.html">Playstation</a></li>
+                <li><a href="xbox.html">Xbox</a></li>
+                <li><a href="nintendo.html">Nintendo</a></li>
+                <li><a href="retro.html">Retro</a></li>
+                <li><a href="arcade.html">Arcade</a></li>
+            </ul>
         </li>
-         <li><a href="about.html">Acerca de</a></li>
+        <li><a href="about.html">Acerca de</a></li>
         <li><a href="faq.html">Preguntas Frecuentes (FAQ)</a></li>
-      </ul>
-    </nav>
+        
+        <li class="menu-acceso-integrado">
+            <a href="login.html" class="btn-login-header" title="Acceso de Administrador">
+                Log in
+            </a>
+        </li>
+        </ul>
+</nav>
 
     <div class="carrito" title="Carrito">
     <span class="icono">🛒</span>
@@ -55,67 +61,44 @@
     <h2>Productos Xbox</h2>
     <div class="grid">
 
-      <div id="lista-productos" class="grid">
+      <article class="producto">
+        <img src="https://m.media-amazon.com/images/I/81tR3RHeVgL._SL1500_.jpg" alt="Nintendo Switch Pikachu Vortex">
+        <h3>Joystick Switch 2 Pikachu Vortex</h3>
+        <p>$90.000</p>
+        <button>Agregar al carrito</button>
+      </article>
 
-      <!-- PRODUCTO 1 -->
-      <div class="card">
-        <img src="https://http2.mlstatic.com/D_NQ_NP_2X_644633-MLA89778623673_082025-F.webp" alt="DualSense 30th">
-        <h3>Joystick Dualsense Ps5 30th</h3>
-        <span class="precio">$100.000</span>
+      <article class="producto">
+        <img src="https://m.media-amazon.com/images/I/81-O2qPK7FL._SL1500_.jpg" alt="Nintendo Switch Mario Mayhem">
+        <h3>Joystick Switch 2 Mario Mayhem</h3>
+        <p>$90.000</p>
+        <button>Agregar al carrito</button>
+      </article>
 
-        <button class="btn-add-cart" data-id="ps5-30th">Agregar al carrito</button>
+      <article class="producto">
+        <img src="https://m.media-amazon.com/images/I/81IHDcz6khL._SL1500_.jpg" alt="Nintendo Switch Legend of Zelda, Midnight Ride">
+        <h3>Joystick Nintendo Switch 2 Midnight Ride</h3>
+        <p>$90.000</p>
+        <button>Agregar al carrito</button>
+      </article>
 
-        <a class="ver-detalle" href="../producto.html?id=ps5-30th">Ver detalle</a>
-      </div>
+      <article class="producto">
+        <img src="https://m.media-amazon.com/images/I/71Ob-K-LHtL._SL1500_.jpg" alt="Nintendo Switch World of Kirby">
+        <h3>Joystick Nintendo Switch 2 World of Kirby</h3>
+        <p>$90.000</p>
+        <button>Agregar al carrito</button>
+      </article>
 
-      <!-- PRODUCTO 2 -->
-      <div class="card">
-        <img src="https://http2.mlstatic.com/D_NQ_NP_2X_866849-MLA91890271839_092025-F.webp" alt="DualSense White">
-        <h3>Joystick Dualsense Ps5 White</h3>
-        <span class="precio">$100.000</span>
-
-        <button class="btn-add-cart" data-id="ps5-white">Agregar al carrito</button>
-
-        <a class="ver-detalle" href="../producto.html?id=ps5-white">Ver detalle</a>
-      </div>
-
-      <!-- PRODUCTO 3 -->
-      <div class="card">
-        <img src="https://http2.mlstatic.com/D_NQ_NP_2X_825330-MLA84549502716_052025-F.webp" alt="DualSense Black">
-        <h3>Joystick Dualsense Ps5 Black</h3>
-        <span class="precio">$100.000</span>
-
-        <button class="btn-add-cart" data-id="ps5-black">Agregar al carrito</button>
-
-        <a class="ver-detalle" href="../producto.html?id=ps5-black">Ver detalle</a>
-      </div>
-
-      <!-- PRODUCTO 4 -->
-      <div class="card">
-        <img src="https://http2.mlstatic.com/D_NQ_NP_2X_687328-MLA84841542561_052025-F.webp" alt="DualSense Cosmic Red">
-        <h3>Joystick Dualsense Ps5 Cosmic Red</h3>
-        <span class="precio">$100.000</span>
-
-        <button class="btn-add-cart" data-id="ps5-cosmic">Agregar al carrito</button>
-
-        <a class="ver-detalle" href="../producto.html?id=ps5-cosmic">Ver detalle</a>
-      </div>
-
-      <!-- PRODUCTO 5 -->
-      <div class="card">
-        <img src="https://http2.mlstatic.com/D_NQ_NP_2X_765755-MLA91874147887_092025-F.webp" alt="DualSense Gray">
-        <h3>Joystick Dualsense Ps5 Gray Camouflage</h3>
-        <span class="precio">$100.000</span>
-
-        <button class="btn-add-cart" data-id="ps5-gray">Agregar al carrito</button>
-
-        <a class="ver-detalle" href="../producto.html?id=ps5-gray">Ver detalle</a>
-
-    </div>
-  </main>
+      <article class="producto">
+        <img src="https://m.media-amazon.com/images/I/71exlVssfYL._SL1500_.jpg" alt="Nintendo Switch Metroid">
+        <h3>Joystick Nintendo Switch 2 Metroid</h3>
+        <p>$90.000</p>
+        <button>Agregar al carrito</button>
+      </article>
 
   <!--FOOTER-->
   <footer>
+    <div class="footer-content"></div>
     <p>&copy; 2025 Retro Gamepad - Todos los derechos reservados.</p>
     <div class="socials">
       <a href="#">🐦 Twitter</a>

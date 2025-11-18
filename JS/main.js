@@ -1,23 +1,24 @@
-// main.js
 import { cargarProductos } from './modules/cards.js';
-import { initSearch } from './modules/search.js';
-import { initCart } from './modules/cart.js';
-import { initSlider } from './modules/slider.js';
-import { initMenu } from './modules/menu.js';
-import { initDetails } from './modules/details.js'; // si lo usás
+import { inicializarLocalStorage } from './modules/datos.js'; 
 
-document.addEventListener('DOMContentLoaded', async () => {
-  console.log("DOM cargado");
+document.addEventListener('DOMContentLoaded', () => {
+    
+    
+    inicializarLocalStorage();
 
-  // Primero renderizamos los productos dinámicos desde Airtable
-  await cargarProductos();
-
-  // Luego activamos las funciones que dependen de los productos
-  initCart();
-  initSearch();
-  initDetails && initDetails();
-
-  // Funciones generales
-  initSlider({ interval: 5000 });
-  initMenu();
+    
+    const path = window.location.pathname.toLowerCase();
+    let categoriaFiltro = null;
+    
+    
+    if (path.includes('nintendo.html')) {
+        categoriaFiltro = 'Nintendo';
+    } else if (path.includes('playstation.html')) {
+        categoriaFiltro = 'Playstation'; 
+    } else if (path.includes('xbox.html')) {
+        categoriaFiltro = 'Xbox'; 
+    }
+    
+    cargarProductos(categoriaFiltro);
+    
 });
