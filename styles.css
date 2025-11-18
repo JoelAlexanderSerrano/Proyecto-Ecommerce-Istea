@@ -689,3 +689,414 @@ footer .socials a {
 footer .socials a:hover {
   text-decoration: underline;
 }
+
+/* AJUSTES AL ENCABEZADO EXISTENTE */
+header.admin-header {
+    /* Mantiene las reglas de fondo #1c1c1c y padding */
+    justify-content: space-between; /* Alinea logo y botón */
+    align-items: center;
+}
+
+.admin-title {
+    /* Estilo del título principal del panel */
+    color: white;
+    font-size: 1.6rem;
+    flex-grow: 1; /* Permite que el título ocupe espacio central */
+    text-align: center;
+    margin: 0 20px;
+}
+
+/* Estilo para el botón "Volver a la Tienda" (usando .btn-buscar como base) */
+.btn-volver {
+    background: #f39c12; /* Naranja principal */
+    color: white;
+    padding: 10px 15px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+/* ESTILOS DE LA SECCIÓN PRINCIPAL */
+.admin-main {
+    padding: 30px 24px;
+    width: 600px;
+    margin: 0 auto; /* Centra el contenido */
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    margin-top: 20px;
+}
+
+/* Estilo para el botón de "Crear Nuevo Producto" */
+#btn-nuevo-producto {
+    background: #4CAF50; /* Verde para crear */
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+/* ESTILOS DEL FORMULARIO */
+.form-crud {
+    margin-bottom: 40px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    display: block; /* Muestra el formulario por defecto, ajusta con JS para ocultarlo */
+}
+
+.formulario-admin label {
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333;
+}
+
+.formulario-admin input[type="text"],
+.formulario-admin input[type="number"],
+.formulario-admin textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+    box-sizing: border-box;
+}
+
+.form-actions {
+    margin-top: 25px;
+    display: flex;
+    gap: 15px;
+}
+
+.btn-guardar {
+    background: #ff9800; /* Naranja (Guardar) */
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.2s;
+}
+
+.btn-cancelar {
+    background: #bbb; /* Gris (Cancelar) */
+    color: #333;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.2s;
+}
+
+/* ESTILOS DE LA TABLA */
+.tabla-admin {
+    width: 100%;
+    border-collapse: collapse; /* Elimina espacios entre celdas */
+    margin-top: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    background: white;
+    border-radius: 8px;
+    overflow: hidden; /* Para que el border-radius funcione */
+}
+
+.tabla-admin th {
+    background-color: #1c1c1c; /* Fondo oscuro del header */
+    color: white;
+    padding: 12px 15px;
+    text-align: left;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+}
+
+.tabla-admin td {
+    padding: 10px 15px;
+    border-bottom: 1px solid #eee;
+    font-size: 0.95rem;
+    vertical-align: middle;
+}
+
+.tabla-admin tr:hover {
+    background-color: #f7f7f7;
+}
+
+/* BOTONES DE ACCIÓN DENTRO DE LA TABLA */
+.btn-editar, .btn-eliminar {
+    border: none;
+    padding: 6px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    margin-right: 5px;
+    font-weight: bold;
+}
+
+.btn-editar {
+    background: #f39c12; /* Naranja */
+    color: white;
+}
+
+.btn-eliminar {
+    background: #e74c3c; /* Rojo (Peligro) */
+    color: white;
+}
+
+/* ===== ESTILOS PARA EL LOGIN ===== */
+.login-main {
+    flex-grow: 1; /* Ocupa el espacio restante */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 50px 24px;
+    background: #f4f4f4;
+}
+
+.login-card {
+    background: white;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+}
+
+.login-card h2 {
+    font-size: 1.8rem;
+    margin-bottom: 30px;
+    color: #333;
+}
+
+.login-card label {
+    display: block;
+    text-align: left;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.login-card input[type="text"],
+.login-card input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+    box-sizing: border-box;
+}
+
+.btn-login {
+    width: 100%;
+    background: #ff9800; /* Naranja principal */
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin-top: 25px;
+    transition: background 0.2s;
+}
+
+.error-message {
+    color: #e74c3c; /* Rojo de error */
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+/* ===== ESTILOS PARA DETALLE DE PRODUCTO (producto.html) ===== */
+.detalle-producto-main {
+    padding: 60px 24px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.detalle-card {
+    display: flex;
+    gap: 40px;
+    background: white;
+    padding: 30px;
+    border-radius: 14px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.detalle-imagen {
+    flex-basis: 40%;
+    max-width: 400px;
+}
+
+.detalle-imagen img {
+    width: 100%;
+    max-height: 400px;
+    object-fit: contain;
+    border-radius: 10px;
+}
+
+.detalle-info {
+    flex-basis: 60%;
+}
+
+.detalle-info h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.detalle-info .descripcion-completa {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: #555;
+    margin-bottom: 25px;
+}
+
+.detalle-info .precio {
+    font-size: 2rem;
+    color: #6afd6a; /* Color destacado */
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+/* Botón de compra en el detalle */
+.btn-comprar {
+    background: #ff9800; 
+    border: none;
+    color: white;
+    padding: 15px 30px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1.2rem;
+    transition: background 0.2s ease;
+}
+
+@media (max-width: 768px) {
+    .detalle-card {
+        flex-direction: column;
+    }
+    .detalle-imagen {
+        max-width: 100%;
+    }
+}
+
+/* ===== ESTILOS PARA EL CARRITO (carrito.html) ===== */
+.carrito-main {
+    padding: 40px 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.carrito-contenido {
+    /* Usa Flexbox para colocar la tabla al lado del resumen */
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap; 
+    margin-top: 30px;
+}
+
+.carrito-lista {
+    flex-grow: 1; /* Permite que la tabla ocupe el mayor espacio posible */
+    min-width: 65%; 
+}
+
+/* --- TABLA DE PRODUCTOS --- */
+.tabla-carrito {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    overflow: hidden; 
+}
+
+.tabla-carrito th, .tabla-carrito td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #eee;
+    text-align: left;
+}
+
+.tabla-carrito th {
+    background-color: #f8f8f8;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    color: #333;
+}
+
+.tabla-carrito tr:last-child td {
+    border-bottom: none;
+}
+
+/* --- CONTROLES DE LA TABLA --- */
+.input-cantidad {
+    width: 55px;
+    padding: 5px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+/* Botón de eliminar producto */
+.btn-quitar {
+    background: none;
+    border: none;
+    color: #e74c3c; /* Rojo de peligro */
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: color 0.2s;
+}
+
+.btn-quitar:hover {
+    color: #c0392b;
+}
+
+/* --- RESUMEN DEL PEDIDO (La caja lateral) --- */
+.carrito-resumen {
+    flex-basis: 300px; /* Ancho fijo para el resumen */
+    background: white;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    height: fit-content; /* Se ajusta al contenido */
+    /* Asegura que no se pegue al borde superior si la tabla es corta */
+    position: sticky; 
+    top: 20px; 
+}
+
+.carrito-resumen h3 {
+    font-size: 1.4rem;
+    margin-bottom: 20px;
+    color: #1c1c1c;
+}
+
+.resumen-detalle p, .resumen-detalle h4 {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.resumen-detalle h4 {
+    font-size: 1.3rem;
+    color: #1c1c1c;
+    margin-top: 15px;
+    border-bottom: none;
+}
+
+/* Botones de acción final (usa los estilos .btn-guardar y .btn-cancelar existentes) */
+#btn-vaciar, #btn-checkout {
+    width: 100%;
+    margin-top: 15px;
+    padding: 12px;
+    border-radius: 8px;
+    border: none;
+    font-weight: bold;
+}

@@ -1,25 +1,63 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Productos</title>
-    <link rel="stylesheet" href="../CSS/style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title id="product-title">Detalle del Producto</title>
+  <link rel="stylesheet" href="../styles.css" />
 </head>
 <body>
 
-    <h1 class="titulo">Productos</h1>
+  <header>
+    <div class="logo">
+      <a href="../index.html">
+        <img src="../Images/Logo.png" alt="Logo Retro" />
+      </a>
+    </div>
 
-    <!-- Contenedor donde productos.js cargará la lista -->
-    <section id="productos" class="lista-productos">
-        Cargando productos...
-    </section>
+    <nav class="navbar">
+      <ul class="menu">
+        <li><a href="index.html">Inicio</a></li>
+        <li class="dropdown">
+          <a href="#">Joysticks ▾</a>
+          <ul class="dropdown-content">
+            <li><a href="Pages/playstation.html">Playstation</a></li>
+            <li><a href="Pages/xbox.html">Xbox</a></li>
+            <li><a href="Pages/nintendo.html">Nintendo</a></li>
+            <li><a href="Pages/retro.html">Retro</a></li>
+            <li><a href="Pages/arcade.html">Arcade</a></li>
+          </ul>
+        </li>
+        <li><a href="Pages/about.html">Acerca de</a></li>
+        <li><a href="Pages/faq.html">Preguntas Frecuentes (FAQ)</a></li>
+      </ul>
+    </nav>
+    <a href="login.html" class="login-link" title="Acceso de Administrador">
+        <span class="icono">🔑 Acceder</span>
+    </a>
+  </header>
+  
+  <div class="content-wrapper">
 
-<script type="module">
-   import { initProductos } from "../JS/modules/productos.js";
-   initProductos();
-</script>
+    <main class="detalle-producto-main">
+        <div id="detalle-producto-container" class="detalle-card">
+            
+            <h1>Cargando detalles...</h1>
 
+        </div>
+    </main>
 
+  </div>
+
+  <footer>
+    <p>&copy; 2025 Retro Gamepad - Todos los derechos reservados.</p>
+    <div class="socials">
+      <a href="#">🐦 Twitter</a>
+      <a href="#">📘 Facebook</a>
+      <a href="#">📸 Instagram</a>
+    </div>
+  </footer>
+
+  <script type="module" src="../JS/detalle.js"></script> 
 </body>
 </html>

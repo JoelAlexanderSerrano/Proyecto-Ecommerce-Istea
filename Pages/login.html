@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Acceso Administrador - Gamepad Retro</title>
+  <link rel="stylesheet" href="../styles.css" /> 
+</head>
+<body>
+  
+  <header class="admin-header"> 
+    <div class="logo">
+      <a href="../index.html">
+        <img src="../Images/Logo.png" alt="Logo Retro" />
+      </a>
+    </div>
+    <h1 class="admin-title">Acceso de Administración</h1>
+    <a href="../index.html" class="btn-buscar" style="background: #f39c12; padding: 10px 15px; border-radius: 6px; text-decoration: none; color: white; font-weight: bold;">
+        Volver
+    </a>
+  </header>
+  
+  <div class="content-wrapper">
+    <main class="login-main">
+        <div class="login-card">
+            <h2>Iniciar Sesión</h2>
+            <form id="login-form">
+                <label for="username">Usuario:</label>
+                <input type="text" id="username" name="username" required>
+                
+                <label for="password">Contraseña:</label>
+                <input type="password" id="password" name="password" required>
+                
+                <button type="submit" class="btn-login">Acceder</button>
+                <p id="login-error" class="error-message"></p>
+            </form>
+        </div>
+    </main>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 Retro Gamepad - Panel de Administración</p>
+  </footer>
+
+  <script type="module" src="../JS/login.js"></script> 
+</body>
+</html>
