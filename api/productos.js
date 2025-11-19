@@ -1,13 +1,13 @@
-const Airtable = require('airtable');
+// api/productos.js (Código optimizado para Netlify/Vercel)
 
-const base = new Airtable({
-    apiKey: process.env.AIRTABLE_API_KEY
-}).base(process.env.AIRTABLE_BASE_ID);
-
-const TABLE_NAME = 'Productos';
-
+// La URL se construye DENTRO de la función para mayor robustez
 module.exports = async (req, res) => {
-    res.setHeader('Access-Control-Allow-Origin', '*');
+    
+    // 🚨 1. Construcción de la URL de Airtable API con las variables de entorno 🚨
+    const AIRTABLE_API_URL = `https://api.airtable.com/v0/${process.env.AIRTABLE_BASE_ID}/Productos`;
+    
+    // 2. CONFIGURACIÓN CORS (Crucial para el desarrollo local)
+    res.setHeader('Access-Control-Allow-Origin', '*'); 
     res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
@@ -16,41 +16,51 @@ module.exports = async (req, res) => {
         return;
     }
 
-
     try {
-        const records = await base(TABLE_NAME).select({
+        // 3. FETCH de los datos
+        const airtableResponse = await fetch(AIRTABLE_API_URL, {
+            headers: {
+                // Utiliza el PAT/API Key en el encabezado de autorización
+                'Authorization': `Bearer ${process.env.AIRTABLE_API_KEY}`
+            }
+        });
 
-        }).all();
+        // 4. Manejo de errores HTTP (ej: 401, 404, 500)
+        if (!airtableResponse.ok) {
+            const errorText = await airtableResponse.text();
+            console.error("Airtable HTTP Error:", airtableResponse.status, errorText);
+            throw new Error(`Fallo de conexión: Airtable Status ${airtableResponse.status}.`);
+        }
 
-        const productos = records.map(record => {
+        const data = await airtableResponse.json();
+
+        // 5. Mapeo y Limpieza de los datos de Airtable
+        const productos = data.records.map(record => {
             const fields = record.fields;
-
-            const imageUrl = (fields.Imagen && fields.Imagen.length > 0)
-                              ? fields.Imagen[0].url
-                              : 'URL_IMAGEN_FALLBACK_SI_NO_HAY';  
-
+            
+            const imageUrl = (fields.Imagen && Array.isArray(fields.Imagen) && fields.Imagen.length > 0) 
+                             ? fields.Imagen[0].url 
+                             : 'URL_IMAGEN_FALLBACK_SI_NO_HAY'; // Cambia esto por un placeholder real.
+            
             return {
                 id: record.id,
                 nombre: fields.Nombre || 'Sin Nombre',
-                descripcion: fields.Descripcion || 'Sin descripcion.',
+                descripcion: fields.Descripcion || 'Sin descripción.',
                 precio: fields.Precio || 0,
                 imagen: imageUrl,
                 stock: fields['# Stock'] || 0,
                 categoria: fields.Categoria || 'General'
-
             };
-
         });
 
+        // 6. Devolver la respuesta JSON
         res.status(200).json(productos);
 
     } catch (error) {
-        console.error("Error al cargar los datos de Airtable:", error);
-
-        res.status(500).json({
+        console.error("Critical Server Error:", error.message);
+        res.status(500).json({ 
             error: "Error al cargar los datos del servidor.",
-            details: error.message
+            details: error.message 
         });
-    }    
-
-};    
+    }
+};
