@@ -42,8 +42,8 @@ const handler = async (event, context) => {
         const productos = data.records.map(record => {
             const fields = record.fields;
             
-            const imageUrl = (fields.Imagen && Array.isArray(fields.Imagen) && fields.Imagen.length > 0) 
-                             ? fields.Imagen[0].url 
+            const imageUrl = fields.URL_Imagen
+                             ? fields.URL_Imagen 
                              : 'URL_IMAGEN_FALLBACK_SI_NO_HAY'; 
             
             return {

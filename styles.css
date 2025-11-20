@@ -4,7 +4,7 @@
 ====================================
 */
 
-/* Reset */
+/* Reset universal */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 html{
@@ -12,29 +12,28 @@ html{
 }
 
 body {
-  min-height: 100vh;
+  min-height: 100%;
   display: flex;
   flex-direction: column;
   font-family: Arial, sans-serif;
   line-height: 1.6;
-  background: #f9f9f9;
-  color: #333;
+  background: #FFFFFF; 
+  color: #333; /* Texto principal oscuro */
 }
 
-/* Contenedor principal que centra y permite el Sticky Footer */
 .content-wrapper {
-  flex-grow: 1; /* Ocupa el espacio restante para empujar el footer */
+  flex-grow: 1; 
   display: flex;
   flex-direction: column;
-  max-width: 1200px; 
+  max-width: 100%; /* Ancho máximo del contenido centrado */
   width: 100%;
-  margin: 0 auto;
+  margin: 0 auto; /* Centrado horizontal */
 }
 
 
 /*
 ====================================
- 2. HEADER Y NAVEGACIÓN (Desktop)
+ 2. HEADER Y NAVEGACIÓN
 ====================================
 */
 
@@ -42,14 +41,22 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: #1c1c1c;
+  
+  /* BARRA OSCURA */
+  background-color: #1c1c1c; 
+  
   padding: 10px 24px;
   border-bottom: 3px solid white;
   gap: 12px;
   flex-wrap: wrap;
+  
+  /* CENTRADO HORIZONTAL DEL HEADER */
+  max-width: 100%; 
+  width: 100%;
+  margin: 0 auto;
 }
 
-/* Logo (Regla consolidada para mantener width: 120px y object-fit: cover) */
+/* Logo */
 .logo img {
   width: 120px;
   height: 120px;
@@ -60,7 +67,7 @@ header {
 
 /* Search */
 .search-bar {
-  flex: 1 1 420px; /* crece pero tiene un mínimo razonable */
+  flex: 1 1 420px;
   display: flex;
   justify-content: center;
   gap: 6px;
@@ -89,16 +96,16 @@ header {
 
 .search-bar button:hover { background: #e67e22; }
 
-/* Menu / Navbar (Consolidado el margin-right) */
+/* Menu / Navbar */
 .menu-icon { display: none; cursor: pointer; font-size: 28px; color: white; background: none; border: none; padding: 6px 8px; }
 
-#menu-toggle { display: none; } /* checkbox hide */
+#menu-toggle { display: none; }
 
-/* Desktop: horizontal menu */
 .navbar { 
   flex: 0 1 auto; 
-  margin-right: 80px; /* Mantenido del código duplicado */
+  margin-right: 80px;
 }
+
 .menu {
   list-style: none;
   display: flex;
@@ -130,7 +137,7 @@ header {
 .dropdown-content {
   display: none;
   position: absolute;
-  top: 100%; /* Ajustado de calc(100% + 6px) a 100% para simplificar */
+  top: 100%;
   left: 0;
   background: #222;
   min-width: 160px;
@@ -148,12 +155,11 @@ header {
 }
 .dropdown-content li a:hover { background: #ff9800; color: #000; }
 
-/* hover en desktop */
 @media (hover: hover) and (min-width: 769px) {
   .dropdown:hover .dropdown-content { display: block; }
 }
 
-/* carrito (Regla consolidada para mantener margin-right: 80px y position: relative) */
+/* carrito */
 .carrito { 
   font-size: 1.5rem; 
   cursor: pointer; 
@@ -187,22 +193,18 @@ header {
 */
 
 @media (max-width: 768px) {
-  /* organiza el header en columnas: el orden se controla con el flujo HTML */
   header { 
     padding: 10px 14px; 
-    max-width: none; /* Asegura que el header ocupe todo el ancho en mobile */
+    max-width: none;
     margin: 0;
   }
 
-  /* mostrar el icono hamburguesa */
   .menu-icon { display: block; order: 2; }
   
-  /* ocultar el banner en mobile (Regla original) */
   .banner {
     display: none;
   }
 
-  /* search se va en su propia fila y ocupa 100% */
   .search-bar {
     order: 3;
     width: 100%;
@@ -212,22 +214,19 @@ header {
   .search-bar input { border-radius: 25px 0 0 25px; width: 100%; }
   .search-bar button { border-radius: 0 25px 25px 0; }
 
-  /* nav ocupa 100% y el ul está oculto por defecto */
   .navbar { order: 4; width: 100%; margin-right: 0; }
   .menu {
-    display: none; /* oculto por defecto en mobile */
+    display: none;
     flex-direction: column;
     gap: 0;
     background: #111;
     width: 100%;
   }
   
-  /* Clase inyectada por JS para abrir el menú */
   .menu.menu-open {
     display: flex !important;
   }
 
-  /* al activar el checkbox, mostramos el menú (regla redundante si se usa JS/menu-open, pero mantenida) */
   #menu-toggle:checked + .menu-icon + .navbar .menu {
     display: flex;
   }
@@ -238,7 +237,6 @@ header {
     text-align: left;
   }
 
-  /* Submenu: posicion estática dentro del flujo */
   .dropdown-content {
     position: static;
     display: none;
@@ -247,24 +245,22 @@ header {
     background: #222;
   }
 
-  /* abrir submenú cuando el enlace dentro recibe focus o cuando se toca (tap) */
   .dropdown:focus-within .dropdown-content { display: flex; flex-direction: column; }
 
-  /* Asegura que el carrito quede visible y alineado al final */
   .carrito { order: 5; margin-top: 6px; margin-right: 0;}
 }
 
 /*
 ====================================
- 4. SECCIONES DE CONTENIDO
+ 4. SECCIÓN PRODUCTOS
 ====================================
 */
 
-/* ===== SECCIÓN PRODUCTOS ===== */
 .productos {
   padding: 50px 24px;
   text-align: center;
-  background: #f8f8f8;
+  /* Fondo claro para que las tarjetas resalten */
+  background: #fff; 
 }
 
 .productos h2 {
@@ -274,7 +270,6 @@ header {
   text-transform: uppercase;
 }
 
-/* REGLA CLAVE PARA EL LAYOUT DE COLUMNAS */
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -282,19 +277,25 @@ header {
 }
 
 .producto {
-  background: white;
+  /* TARJETA BLANCA SOBRE FONDO CLARO */
+  background: white; 
   padding: 20px;
-  border-radius: 14px;
-  box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+  border-radius: 8px; 
+  
+  /* Sombra sutil para hacerla flotar */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
+  
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  color: #333; /* Asegura que el texto dentro sea legible */
 }
 
 .producto:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+  transform: translateY(-4px); 
+  /* Sombra de acento naranja al hacer hover */
+  box-shadow: 0 8px 15px rgba(255,152,0,0.2); 
 }
 
 .producto img {
@@ -312,19 +313,21 @@ header {
 }
 
 .producto .precio {
+  /* PRECIO DESTACADO (NARANJA) */
   font-weight: bold;
   margin-bottom: 12px;
-  color: #6afd6a; /* Color verde neón */
-  font-size: 1.2rem;
+  color: #ff9800; 
+  font-size: 1.4rem;
   display: block;
 }
 
 .producto button {
+  /* Botón de llamada a la acción */
   background: #ff9800;
   border: none;
-  color: white;
+  color: #111; /* Texto negro para contraste en botón naranja */
   padding: 10px 16px;
-  border-radius: 10px;
+  border-radius: 4px;
   cursor: pointer;
   font-weight: bold;
   transition: background 0.2s ease;
@@ -348,202 +351,23 @@ header {
     text-decoration: underline;
 }
 
-/* ===== BANNER / SLIDER ===== */
-.banner {
-  position: relative;
-  overflow: hidden;
-  width: 100%;
-  height: 500px;
-  margin: 30px 0;
-  border-radius: 12px;
-  box-shadow: 0 6px 16px rgba(0,0,0,0.2);
-}
-
-.slides {
-  width: 100%;
-  height: 100%;
-  position: relative;
-}
-
-.slide {
-  opacity: 0;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  transition: opacity 0.8s ease-in-out;
-}
-
-.slide.active {
-  opacity: 1;
-}
-
-.slide img {
-  width: 100%;
-  height: 100%;
-  border-radius: 12px;
-  display: block;
-  /* El object-fit: cover aquí depende si las imágenes son de distintos tamaños, 
-  pero para sliders se recomienda usar cover o fill para que encajen */
-}
-
-/* Botones */
-.prev, .next {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: rgba(0,0,0,0.5);
-  color: white;
-  font-size: 2rem;
-  border: none;
-  padding: 10px 16px;
-  cursor: pointer;
-  border-radius: 50%;
-  z-index: 10;
-  transition: background 0.3s ease;
-}
-
-.prev:hover, .next:hover {
-  background: rgba(0,0,0,0.7);
-}
-
-.prev { left: 10px; }
-.next { right: 10px; }
-
-/* Indicadores */
-.indicators {
-  position: absolute;
-  bottom: 15px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 8px;
-}
-
-.indicators .dot {
-  width: 12px;
-  height: 12px;
-  background: rgba(255,255,255,0.5);
-  border-radius: 50%;
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
-
-.indicators .dot.active {
-  background: #ff9800;
-}
-
-/* Responsive Banner */
-@media (max-width: 768px) {
-  .banner { height: 300px; }
-  .prev, .next { font-size: 1.5rem; padding: 6px 10px; }
-}
-
-/* ===== SECCIÓN ABOUT ===== */
-.about {
-  padding: 60px 24px;
-  background: #fff;
-  text-align: center;
-}
-
-.about h2 {
-  font-size: 2.2rem;
-  margin-bottom: 25px;
-  color: #222;
-  text-transform: uppercase;
-}
-
-.about p {
-  max-width: 800px;
-  margin: 12px auto;
-  font-size: 1.1rem;
-  line-height: 1.8;
-  color: #444;
-}
-
-.about strong {
-  color: #ff9800;
-}
-
-.about span {
-  color: #6afd6a;
-  font-weight: bold;
-}
-
-/* ===== SECCIÓN FAQ ===== */
-.faq {
-  padding: 2rem;
-  max-width: 900px;
-  margin: 0 auto;
-  text-align: left;
-}
-
-.faq h1 {
-  text-align: center;
-  margin-bottom: 1rem;
-}
-
-.faq-lista {
-  margin-top: 2rem;
-}
-
-.faq-item {
-  margin-bottom: 2rem;
-}
-
-.faq-item h2 {
-  font-size: 1.2rem;
-  color: #ff9800; 
-  margin-bottom: .5rem;
-}
-
-.faq-item p {
-  font-size: 1rem;
-  line-height: 1.5;
-  color: #444;
-}
-
-.en-construccion {
-  text-align: center;
-  padding: 80px 20px;
-}
-
-.en-construccion .intro h1 {
-  font-size: 2.2rem;
-  margin-bottom: 10px;
-  color: #ffcc00;
-  text-shadow: 1px 1px 3px #000;
-}
-
-.en-construccion .mensaje {
-  font-size: 1.2rem;
-  margin-top: 10px;
-  color: #ddd;
-}
-
-.imagen-construccion {
-  max-width: 250px;
-  margin-top: 30px;
-  filter: drop-shadow(0 0 8px rgba(0,0,0,0.4));
-}
-
-
 /*
 ====================================
- 5. FOOTER (Solución final de alineación)
+ 5. FOOTER Y OTRAS SECCIONES
 ====================================
 */
 
-/* FOOTER EXTERNO: Ancho de borde a borde y color de fondo */
+/* ===== FOOTER (BARRA DE BORDE A BORDE) ===== */
 footer {
   background: #111;
   color: #eee;
   padding: 20px 10px;
-  width: 100%; /* CLAVE: La barra negra debe ocupar el 100% de la ventana */
+  width: 100%; /* CLAVE: Ocupa el 100% del ancho del viewport */
 }
 
-/* FOOTER INTERNO: Limita el ancho y centra el texto/enlaces */
+/* FOOTER INTERNO: Limita el ancho y centra el contenido */
 .footer-content {
-  max-width: 1200px; /* Igual que el content-wrapper */
+  max-width: 100%;
   margin: 0 auto;
   text-align: center;
 }
@@ -564,422 +388,7 @@ footer .socials a:hover {
   text-decoration: underline;
 }
 
-
-/*
-====================================
- 6. PÁGINAS ADMINISTRATIVAS Y LOGIN
-====================================
-*/
-
-/* Ajustes al encabezado existente */
-header.admin-header {
-  justify-content: space-between;
-  align-items: center;
-}
-
-.admin-title {
-  color: white;
-  font-size: 1.6rem;
-  flex-grow: 1;
-  text-align: center;
-  margin: 0 20px;
-}
-
-/* Estilo para el botón "Volver a la Tienda" (usando .btn-buscar como base) */
-.btn-volver {
-  background: #f39c12;
-  color: white;
-  padding: 10px 15px;
-  border-radius: 6px;
-  text-decoration: none;
-  font-weight: bold;
-  white-space: nowrap;
-}
-
-/* ESTILOS DE LA SECCIÓN PRINCIPAL ADMIN */
-.admin-main {
-  padding: 30px 24px;
-  width: 600px;
-  margin: 0 auto;
-  background: #fff;
-  border-radius: 14px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-  margin-top: 20px;
-}
-
-/* Estilo para el botón de "Crear Nuevo Producto" */
-#btn-nuevo-producto {
-  background: #4CAF50;
-  color: white;
-  border: none;
-  padding: 12px 20px;
-  border-radius: 8px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background 0.3s;
-}
-
-/* ESTILOS DEL FORMULARIO */
-.form-crud {
-  margin-bottom: 40px;
-  padding: 20px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  display: block;
-}
-
-.formulario-admin label {
-  display: block;
-  margin-top: 15px;
-  margin-bottom: 5px;
-  font-weight: bold;
-  color: #333;
-}
-
-.formulario-admin input[type="text"],
-.formulario-admin input[type="number"],
-.formulario-admin textarea {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 1rem;
-  box-sizing: border-box;
-}
-
-.form-actions {
-  margin-top: 25px;
-  display: flex;
-  gap: 15px;
-}
-
-.btn-guardar {
-  background: #ff9800;
-  color: white;
-  border: none;
-  padding: 10px 16px;
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: background 0.2s;
-}
-
-.btn-cancelar {
-  background: #bbb;
-  color: #333;
-  border: none;
-  padding: 10px 16px;
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: background 0.2s;
-}
-
-/* ESTILOS DE LA TABLA */
-.tabla-admin {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 20px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  background: white;
-  border-radius: 8px;
-  overflow: hidden;
-}
-
-.tabla-admin th {
-  background-color: #1c1c1c;
-  color: white;
-  padding: 12px 15px;
-  text-align: left;
-  font-weight: bold;
-  text-transform: uppercase;
-  font-size: 0.85rem;
-}
-
-.tabla-admin td {
-  padding: 10px 15px;
-  border-bottom: 1px solid #eee;
-  font-size: 0.95rem;
-  vertical-align: middle;
-}
-
-.tabla-admin tr:hover {
-  background-color: #f7f7f7;
-}
-
-/* BOTONES DE ACCIÓN DENTRO DE LA TABLA */
-.btn-editar, .btn-eliminar {
-  border: none;
-  padding: 6px 10px;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 0.8rem;
-  margin-right: 5px;
-  font-weight: bold;
-}
-
-.btn-editar {
-  background: #f39c12;
-  color: white;
-}
-
-.btn-eliminar {
-  background: #e74c3c;
-  color: white;
-}
-
-/* ===== ESTILOS PARA EL LOGIN ===== */
-.login-main {
-  flex-grow: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 50px 24px;
-  background: #f4f4f4;
-}
-
-.login-card {
-  background: white;
-  padding: 40px;
-  border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-  max-width: 400px;
-  width: 100%;
-  text-align: center;
-}
-
-.login-card h2 {
-  font-size: 1.8rem;
-  margin-bottom: 30px;
-  color: #333;
-}
-
-.login-card label {
-  display: block;
-  text-align: left;
-  margin-top: 15px;
-  margin-bottom: 5px;
-  font-weight: bold;
-}
-
-.login-card input[type="text"],
-.login-card input[type="password"] {
-  width: 100%;
-  padding: 12px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 1rem;
-  box-sizing: border-box;
-}
-
-.btn-login {
-  width: 100%;
-  background: #ff9800;
-  color: white;
-  border: none;
-  padding: 12px;
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: bold;
-  font-size: 1.1rem;
-  margin-top: 25px;
-  transition: background 0.2s;
-}
-
-.error-message {
-  color: #e74c3c;
-  margin-top: 10px;
-  font-weight: bold;
-}
-
-/*
-====================================
- 7. PÁGINAS ESPECÍFICAS (DETALLE, CARRITO)
-====================================
-*/
-
-/* ===== ESTILOS PARA DETALLE DE PRODUCTO (producto.html) ===== */
-.detalle-producto-main {
-  padding: 60px 24px;
-  max-width: 1000px;
-  margin: 0 auto;
-}
-
-.detalle-card {
-  display: flex;
-  gap: 40px;
-  background: white;
-  padding: 30px;
-  border-radius: 14px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-}
-
-.detalle-imagen {
-  flex-basis: 40%;
-  max-width: 400px;
-}
-
-.detalle-imagen img {
-  width: 100%;
-  max-height: 400px;
-  object-fit: contain;
-  border-radius: 10px;
-}
-
-.detalle-info {
-  flex-basis: 60%;
-}
-
-.detalle-info h1 {
-  font-size: 2.5rem;
-  margin-bottom: 10px;
-}
-
-.detalle-info .descripcion-completa {
-  font-size: 1.1rem;
-  line-height: 1.7;
-  color: #555;
-  margin-bottom: 25px;
-}
-
-.detalle-info .precio {
-  font-size: 2rem;
-  color: #6afd6a;
-  font-weight: bold;
-  margin-bottom: 20px;
-}
-
-/* Botón de compra en el detalle */
-.btn-comprar {
-  background: #ff9800; 
-  border: none;
-  color: white;
-  padding: 15px 30px;
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: bold;
-  font-size: 1.2rem;
-  transition: background 0.2s ease;
-}
-
-@media (max-width: 768px) {
-    .detalle-card {
-        flex-direction: column;
-    }
-    .detalle-imagen {
-        max-width: 100%;
-    }
-}
-
-/* ===== ESTILOS PARA EL CARRITO (carrito.html) ===== */
-.carrito-main {
-  padding: 40px 24px;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.carrito-contenido {
-  display: flex;
-  gap: 30px;
-  flex-wrap: wrap; 
-  margin-top: 30px;
-}
-
-.carrito-lista {
-  flex-grow: 1;
-  min-width: 65%; 
-}
-
-/* --- TABLA DE PRODUCTOS --- */
-.tabla-carrito {
-  width: 100%;
-  border-collapse: collapse;
-  background: white;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  border-radius: 8px;
-  overflow: hidden; 
-}
-
-.tabla-carrito th, .tabla-carrito td {
-  padding: 12px 15px;
-  border-bottom: 1px solid #eee;
-  text-align: left;
-}
-
-.tabla-carrito th {
-  background-color: #f8f8f8;
-  font-weight: bold;
-  text-transform: uppercase;
-  font-size: 0.85rem;
-  color: #333;
-}
-
-.tabla-carrito tr:last-child td {
-  border-bottom: none;
-}
-
-/* --- CONTROLES DE LA TABLA --- */
-.input-cantidad {
-  width: 55px;
-  padding: 5px;
-  border-radius: 4px;
-  border: 1px solid #ccc;
-  text-align: center;
-  font-size: 0.9rem;
-}
-
-/* Botón de eliminar producto */
-.btn-quitar {
-  background: none;
-  border: none;
-  color: #e74c3c;
-  cursor: pointer;
-  font-size: 1.2rem;
-  transition: color 0.2s;
-}
-
-.btn-quitar:hover {
-  color: #c0392b;
-}
-
-/* --- RESUMEN DEL PEDIDO (La caja lateral) --- */
-.carrito-resumen {
-  flex-basis: 300px;
-  background: white;
-  padding: 25px;
-  border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-  height: fit-content;
-  position: sticky; 
-  top: 20px; 
-}
-
-.carrito-resumen h3 {
-  font-size: 1.4rem;
-  margin-bottom: 20px;
-  color: #1c1c1c;
-}
-
-.resumen-detalle p, .resumen-detalle h4 {
-  display: flex;
-  justify-content: space-between;
-  padding: 8px 0;
-  border-bottom: 1px solid #eee;
-}
-
-.resumen-detalle h4 {
-  font-size: 1.3rem;
-  color: #1c1c1c;
-  margin-top: 15px;
-  border-bottom: none;
-}
-
-/* Botones de acción final */
-#btn-vaciar, #btn-checkout {
-  width: 100%;
-  margin-top: 15px;
-  padding: 12px;
-  border-radius: 8px;
-  border: none;
-  font-weight: bold;
+/* Otras secciones (About, FAQ, Login) deben mantener sus estilos de fondo blanco para consistencia */
+.about, .faq, .login-main, .admin-main {
+    background: #fff; /* Asegura el fondo blanco/claro en el contenido */
 }
