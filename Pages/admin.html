@@ -1,89 +1,52 @@
 <!doctype html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Panel de Administración - Gamepad Retro</title>
-  <link rel="stylesheet" href="../styles.css" /> 
+    <title>Panel de Administración - Gamepad Retro</title>
+    <link rel="stylesheet" href="../styles.css" /> 
 </head>
 <body>
-
-  <header class="admin-header">
-    <div class="logo">
-      <a href="../index.html">
-        <img src="../Images/Logo.png" alt="Logo Retro - Admin" />
-      </a>
+    
+    <div class="header-bg">
+        <header>
+            <h2>ADMINISTRACIÓN DE PRODUCTOS</h2>
+            <button id="logout-btn" class="btn-logout">Cerrar Sesión</button>
+        </header>
     </div>
 
-    <h1 class="admin-title">Panel de Administración de Productos</h1>
+    <div class="content-wrapper">
+        <main class="admin-main">
+            
+            <section class="admin-form-section">
+                <h3>Crear / Editar Producto</h3>
+                <form id="product-form" class="crud-form">
+                    <label for="product-name">Nombre del Producto</label>
+                    <input type="text" id="product-name" required>
+                    
+                    <button type="submit" id="save-btn" class="btn-primary">Guardar Producto</button>
+                    <button type="button" id="cancel-btn" class="btn-secondary">Cancelar Edición</button>
+                </form>
+            </section>
 
-    <a href="../index.html" class="btn-buscar" style="background: #e67e22; padding: 10px 15px; border-radius: 6px; text-decoration: none; color: white; font-weight: bold;">
-        Volver a la Tienda
-    </a>
-  </header>
-  
-  <div class="content-wrapper">
+            <section class="admin-table-section">
+                <h3>Productos Actuales</h3>
+                <table id="product-list-table" class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Precio</th>
+                            <th>Stock</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="product-table-body">
+                        </tbody>
+                </table>
+            </section>
 
-    <main class="admin-main">
-        
-        <button id="btn-nuevo-producto" class="btn-primario" style="margin-bottom: 25px;">
-            ➕ Crear Nuevo Producto
-        </button>
-
-        <section id="form-container" class="form-crud">
-            <h3>Crear / Editar Producto</h3>
-            <form id="producto-form" class="formulario-admin">
-                <input type="hidden" id="producto-id" name="id">
-                
-                <label for="nombre">Nombre:</label>
-                <input type="text" id="nombre" name="nombre" required>
-                
-                <label for="descripcion">Descripción:</label>
-                <textarea id="descripcion" name="descripcion" rows="4" required></textarea>
-                
-                <label for="precio">Precio:</label>
-                <input type="number" id="precio" name="precio" required>
-                
-                <label for="stock">Stock:</label>
-                <input type="number" id="stock" name="stock" required>
-                
-                <label for="categoria">Categoría:</label>
-                <input type="text" id="categoria" name="categoria" required>
-                
-                <label for="imagen-url">URL de la Imagen (Airtable):</label>
-                <input type="text" id="imagen-url" name="imagen-url" placeholder="Ej: https://dl.airtable.com/..."> 
-
-                <div class="form-actions">
-                    <button type="submit" class="btn-guardar">Guardar Cambios</button>
-                    <button type="button" id="btn-cancelar" class="btn-cancelar">Cancelar</button>
-                </div>
-            </form>
-        </section>
-
-        <section class="productos-gestion">
-            <h2>Inventario Actual</h2>
-            <table id="productos-tabla" class="tabla-admin">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Nombre</th>
-                        <th>Precio</th>
-                        <th>Stock</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody id="tabla-body">
-                    <tr><td colspan="5">Cargando productos...</td></tr>
-                </tbody>
-            </table>
-        </section>
-
-    </main>
-
-  </div> <footer>
-    <p>&copy; 2025 Retro Gamepad - Panel de Administración</p>
-    </footer>
-
-    <script type="module" src="../JS/admin-crud.js"></script> 
-</body>
+        </main>
+    </div> <footer></footer>
+    
+    <script type="module" src="../JS/modules/admin_auth.js"></script>
+    </body>
 </html>
