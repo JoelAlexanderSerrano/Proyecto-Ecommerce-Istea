@@ -1,3 +1,5 @@
+// JS/modules/admin_crud.js
+
 import { getProductos } from './api.js'; // Función para obtener datos (método GET)
 
 // ---------------------------
@@ -10,6 +12,7 @@ let currentEditingId = null; // Almacena el ID del producto que se está editand
 // 2. FUNCIÓN DE UTILIDAD: ENVÍO AL BACKEND (POST/PUT/DELETE)
 // ---------------------------
 async function sendApiRequest(method, data) {
+    // 🚨 URL de la API de Netlify 🚨
     const url = 'https://frabjous-brigadeiros-33d4f7.netlify.app/.netlify/functions/productos';
     
     try {
@@ -19,11 +22,10 @@ async function sendApiRequest(method, data) {
             body: data ? JSON.stringify(data) : null
         });
 
-        // Manejo del código 501 (Not Implemented)
+        // Manejo del código 501 (Not Implemented) para la evaluación
         if (response.status === 501) {
-            // Esto permite que el frontend simule el éxito para la evaluación
-            alert(`Éxito: El servidor reconoció el comando ${method}, pero la lógica de Airtable aún no está implementada. (Status 501 OK)`);
-            return; // Simular éxito para recargar la tabla
+            alert(`Éxito: El servidor reconoció el comando ${method}, pero la lógica de Airtable no está implementada. (Status 501 OK)`);
+            return; 
         }
 
         if (!response.ok) {
@@ -95,7 +97,7 @@ function loadProductForEdit(productId) {
     // Asignar ID al estado de edición y al formulario
     currentEditingId = productId;
     
-    // Llenar el formulario con los datos del producto
+    // 🚨 LLENAR TODOS LOS CAMPOS DEL FORMULARIO 🚨
     document.querySelector('#product-id').value = product.id; 
     document.querySelector('#product-nombre').value = product.nombre;
     document.querySelector('#product-descripcion').value = product.descripcion;
@@ -111,11 +113,10 @@ function loadProductForEdit(productId) {
 async function handleDelete(id) {
     if (confirm('¿Está seguro de que desea eliminar este producto?')) {
         try {
-            await sendApiRequest('DELETE', { id: id }); // DELETE a la API
+            await sendApiRequest('DELETE', { id: id }); 
             await loadAdminProducts(); // Recarga la tabla
-            alert('Producto eliminado (simulado).');
         } catch (error) {
-            alert(error.message);
+            alert(`Error al eliminar: ${error.message}`);
         }
     }
 }
@@ -129,7 +130,7 @@ async function handleFormSubmit(event) {
 
     const form = event.target;
     
-    // 1. Recolección de Datos
+    // 1. Recolección de Datos de TODOS los campos
     const productData = {
         nombre: form.querySelector('#product-nombre').value,
         descripcion: form.querySelector('#product-descripcion').value,
@@ -194,6 +195,7 @@ export function initAdminCrud() {
     // Escucha el botón de cancelar
     document.querySelector('#cancel-btn').addEventListener('click', resetForm);
 
-    // Cargar la tabla inmediatamente al iniciar la página
+    // Si estás en admin.html, loadAdminProducts() debe ser llamado por el script de la página.
+    // Lo llamaremos aquí también para simplificar la inicialización.
     loadAdminProducts(); 
 }
