@@ -34,8 +34,9 @@ export function initLogin() {
     if (loginForm) {
         // Asocia la función handleLogin al evento submit del formulario
         loginForm.addEventListener('submit', handleLogin);
+        console.log('Login form listener attached.');
+        } else {
+        console.error('Error: No se encontró el formulario #login-form.');
     }
 }
-
-// Llama a la función de inicialización cuando el script se carga
-initLogin();
+document.addEventListener('DOMContentLoaded', initLogin);

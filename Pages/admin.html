@@ -47,6 +47,17 @@
         </main>
     </div> <footer></footer>
     
-    <script type="module" src="../JS/modules/admin_auth.js"></script>
+<script type="module" src="../JS/modules/admin_auth.js"></script>
+<script type="module" src="../JS/modules/admin_crud.js"></script>
+
+<script type="module">
+    import { initAdminAuth } from '../JS/modules/admin_auth.js';
+    import { loadAdminProducts } from '../JS/modules/admin_crud.js';
+
+    initAdminAuth();
+    loadAdminProducts(); // ⬅️ Llamada para cargar los datos
+</script>
+</body>
+</html>
     </body>
 </html>

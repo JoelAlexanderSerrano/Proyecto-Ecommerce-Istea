@@ -52,6 +52,13 @@ const handler = async (event, context) => {
                 const productos = data.records.map(record => {
                     const fields = record.fields;
                     
+                    let stockValue = fields['# Stock'];
+
+                    if (typeof stockValue === 'string') {
+                        // Reemplaza la coma decimal por punto, luego convierte a entero
+                        stockValue = stockValue.replace(',', '.'); 
+                    }
+                    const stockLimpio = parseInt(stockValue, 10) || 0;
                     // Asume que URL_Imagen es un string directo (por tu última configuración)
                     const imageUrl = fields.URL_Imagen ? fields.URL_Imagen : 'URL_IMAGEN_FALLBACK_SI_NO_HAY'; 
                     
@@ -61,7 +68,7 @@ const handler = async (event, context) => {
                         descripcion: fields.Descripcion || 'Sin descripción.',
                         precio: fields.Precio || 0,
                         imagen: imageUrl,
-                        stock: fields['# Stock'] || 0,
+                        stock: stockLimpio,
                         categoria: fields.Categoria || 'General'
                     };
                 });
