@@ -1,0 +1,24 @@
+{
+  "name": "proyecto-ecommerce-istea",
+  "version": "1.0.0",
+  "description": "Bienvenidos a mi proyecto de la materia Aplicaciones Web Cliente.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JoelAlexanderSerrano/Proyecto-Ecommerce-Istea.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/JoelAlexanderSerrano/Proyecto-Ecommerce-Istea/issues"
+  },
+  "homepage": "https://github.com/JoelAlexanderSerrano/Proyecto-Ecommerce-Istea#readme",
+  "dependencies": {
+    "airtable": "^0.12.2"
+  }
+}

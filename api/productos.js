@@ -1,117 +1,171 @@
-// api/productos.js
+// api/productos.js - Lógica CRUD COMPLETA con Airtable
 
-// Usamos fetch nativo para la conexión directa y robusta
-const AIRTABLE_API_URL = `https://api.airtable.com/v0/${process.env.AIRTABLE_BASE_ID}/Productos`;
+const Airtable = require('airtable');
 
-// La función principal debe llamarse 'handler' para que Netlify la encuentre
-const handler = async (event, context) => {
-    
-    // 1. CONSTRUCCIÓN DE ENCABEZADOS Y CORS
-    const headers = {
-        // Permite a tu frontend (Netlify/localhost) acceder a esta API
-        'Access-Control-Allow-Origin': '*', 
-        'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
-        'Access-Control-Allow-Headers': 'Content-Type',
-        'Content-Type': 'application/json'
-    };
+// 🚨 VARIABLES DE ENTORNO 🚨
+// Airtable requiere tu Base ID y API Key. DEBEN configurarse en Netlify
+// bajo Settings > Build & deploy > Environment variables.
+const { AIRTABLE_API_KEY, AIRTABLE_BASE_ID } = process.env;
 
-    // Manejar la solicitud OPTIONS (preflight check)
+// Validar que las variables estén presentes
+if (!AIRTABLE_API_KEY || !AIRTABLE_BASE_ID) {
+    throw new Error('AIRTABLE_API_KEY o AIRTABLE_BASE_ID no están definidos en las variables de entorno.');
+}
+
+// Inicializar Airtable
+const base = new Airtable({ apiKey: AIRTABLE_API_KEY }).base(AIRTABLE_BASE_ID);
+const TABLE_NAME = 'Productos'; // Nombre de tu tabla
+
+// Encabezados CORS para permitir la comunicación con el frontend
+const headers = {
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Headers': 'Content-Type',
+    'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+    'Content-Type': 'application/json'
+};
+
+// Función principal de Netlify Serverless
+exports.handler = async (event, context) => {
+    // Manejo de la solicitud CORS Preflight (OPTIONS)
     if (event.httpMethod === 'OPTIONS') {
-        return {
-            statusCode: 200,
-            headers // Devuelve los permisos CORS y termina
-        };
+        return { statusCode: 200, headers, body: '' };
     }
 
     try {
-        // 2. SWITCH para manejar los diferentes métodos HTTP
+        // Parsear el cuerpo de la solicitud (si existe)
+        let bodyData = {};
+        if (event.body) {
+            try {
+                bodyData = JSON.parse(event.body);
+            } catch (e) {
+                return { statusCode: 400, headers, body: JSON.stringify({ error: 'Cuerpo de solicitud JSON inválido' }) };
+            }
+        }
+
         switch (event.httpMethod) {
             
-            // =======================================================
-            // GET: Leer/Obtener todos los productos
-            // =======================================================
+            // -----------------------------------------------------------------
+            // 1. LECTURA (GET) - Ya funcional, optimizada.
+            // -----------------------------------------------------------------
             case 'GET':
-                // Ejecutar la solicitud HTTP directa a Airtable
-                const airtableResponse = await fetch(AIRTABLE_API_URL, {
-                    headers: {
-                        // Utiliza el PAT/API Key en el encabezado de autorización
-                        'Authorization': `Bearer ${process.env.AIRTABLE_API_KEY}`
-                    }
-                });
+                const records = await base(TABLE_NAME).select({
+                    view: "Grid view" // Asegúrate de que esta vista exista en Airtable
+                }).firstPage();
 
-                // Manejo de errores de conexión (401, 404, etc.)
-                if (!airtableResponse.ok) {
-                    const errorText = await airtableResponse.text();
-                    console.error("Airtable HTTP Error:", airtableResponse.status, errorText);
-                    throw new Error(`Fallo de conexión: Airtable Status ${airtableResponse.status}.`);
-                }
-
-                const data = await airtableResponse.json();
-
-                // Mapeo y Limpieza de los datos de Airtable
-                const productos = data.records.map(record => {
+                const productos = records.map(record => {
                     const fields = record.fields;
-                    
                     let stockValue = fields.Stock;
-
-                    
                     const stockLimpio = parseInt(stockValue) || 0;
-                    // Asume que URL_Imagen es un string directo (por tu última configuración)
-                    const imageUrl = fields.URL_Imagen ? fields.URL_Imagen : 'URL_IMAGEN_FALLBACK_SI_NO_HAY'; 
-                    
+
                     return {
                         id: record.id,
                         nombre: fields.Nombre || 'Sin Nombre',
                         descripcion: fields.Descripcion || 'Sin descripción.',
                         precio: fields.Precio || 0,
-                        imagen: imageUrl,
+                        imagen: fields.URL_Imagen || 'URL_IMAGEN_FALLBACK_SI_NO_HAY',
                         stock: stockLimpio,
                         categoria: fields.Categoria || 'General'
                     };
                 });
 
-                // Respuesta final de éxito (200 OK)
+                return { statusCode: 200, headers, body: JSON.stringify(productos) };
+
+            // -----------------------------------------------------------------
+            // 2. CREACIÓN (POST) - Inserta un nuevo producto.
+            // -----------------------------------------------------------------
+            case 'POST':
+                // Mapear el JSON del frontend a la estructura de campos de Airtable
+                const newRecord = {
+                    "Nombre": bodyData.nombre,
+                    "Descripcion": bodyData.descripcion,
+                    "Precio": parseFloat(bodyData.precio),
+                    "Stock": parseInt(bodyData.stock, 10),
+                    "Categoria": bodyData.categoria,
+                    "URL_Imagen": bodyData.imagen
+                };
+
+                const createdRecord = await base(TABLE_NAME).create([{ fields: newRecord }]);
+                
+                return { 
+                    statusCode: 201, 
+                    headers, 
+                    body: JSON.stringify({ 
+                        message: "Producto creado exitosamente", 
+                        id: createdRecord[0].id 
+                    }) 
+                };
+
+            // -----------------------------------------------------------------
+            // 3. ACTUALIZACIÓN (PUT) - Modifica un producto existente.
+            // -----------------------------------------------------------------
+            case 'PUT':
+                const recordId = bodyData.id;
+                
+                if (!recordId) {
+                    return { statusCode: 400, headers, body: JSON.stringify({ error: "ID es requerido para actualizar." }) };
+                }
+
+                const updateFields = {
+                    "Nombre": bodyData.nombre,
+                    "Descripcion": bodyData.descripcion,
+                    "Precio": parseFloat(bodyData.precio),
+                    "Stock": parseInt(bodyData.stock, 10),
+                    "Categoria": bodyData.categoria,
+                    "URL_Imagen": bodyData.imagen
+                };
+
+                await base(TABLE_NAME).update([
+                    { id: recordId, fields: updateFields }
+                ]);
+                
                 return { 
                     statusCode: 200, 
                     headers, 
-                    body: JSON.stringify(productos) 
+                    body: JSON.stringify({ 
+                        message: "Producto actualizado exitosamente", 
+                        id: recordId 
+                    }) 
                 };
 
-            // =======================================================
-            // POST / PUT / DELETE: Métodos de escritura/modificación
-            // =======================================================
-            case 'POST':
-            case 'PUT':
+            // -----------------------------------------------------------------
+            // 4. ELIMINACIÓN (DELETE) - Elimina un producto.
+            // -----------------------------------------------------------------
             case 'DELETE':
-                // Devolvemos 501 Not Implemented: Reconocemos la petición, 
-                // pero la lógica de base de datos no está escrita aún.
-                return {
-                    statusCode: 501, 
-                    headers,
-                    body: JSON.stringify({ error: "Método reconocido pero la lógica CRUD aún no ha sido implementada." })
+                const deleteId = bodyData.id;
+
+                if (!deleteId) {
+                    return { statusCode: 400, headers, body: JSON.stringify({ error: "ID es requerido para eliminar." }) };
+                }
+                
+                await base(TABLE_NAME).destroy([deleteId]);
+
+                return { 
+                    statusCode: 200, 
+                    headers, 
+                    body: JSON.stringify({ 
+                        message: "Producto eliminado exitosamente", 
+                        id: deleteId 
+                    }) 
                 };
-            
+
+            // -----------------------------------------------------------------
             default:
-                // Si el método no es compatible (ej. PATCH)
+                // Manejo de métodos no permitidos
                 return {
-                    statusCode: 405, // Method Not Allowed
+                    statusCode: 405,
                     headers,
-                    body: JSON.stringify({ error: 'Método HTTP no permitido.' })
+                    body: JSON.stringify({ error: 'Método no permitido' })
                 };
         }
     } catch (error) {
-        // 3. MANEJO DE ERRORES CRÍTICOS
-        console.error("Critical Server Error:", error.message);
+        console.error("Error en la función serverless:", error);
         return {
             statusCode: 500,
             headers,
             body: JSON.stringify({ 
-                error: "Error al cargar los datos del servidor. (Verificar log de Netlify).",
-                details: error.message 
+                error: 'Error interno del servidor', 
+                message: error.message 
             })
         };
     }
 };
-
-// 🚨 LÍNEA CRÍTICA: Exportar la función 'handler' para Netlify 🚨
-module.exports = { handler };
