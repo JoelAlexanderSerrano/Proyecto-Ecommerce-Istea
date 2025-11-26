@@ -1,8 +1,7 @@
 [build]
-  # Comando de construcción (si no tienes uno, es buena práctica incluirlo)
-  # command = "npm install" 
-  publish = "." # Carpeta que se publicará (la raíz del proyecto)
+
+  command = "npm install" 
+  publish = "."
 
 [functions]
-  # 🚨 ESTO ES CLAVE: Le dice a Netlify que busque funciones en la carpeta 'api' 🚨
   directory = "api"
