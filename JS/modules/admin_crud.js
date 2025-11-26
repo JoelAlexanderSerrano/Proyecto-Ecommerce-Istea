@@ -129,13 +129,18 @@ async function handleFormSubmit(event) {
     event.preventDefault();
 
     const form = event.target;
+    const sanitizeNumber = (value) => {
+        const cleanedValue = value ? String(value).replace(',', '.') : 0;
+        const number = parseFloat(cleanedValue);
+        return isNaN(number) ? 0 : number; 
+};
     
     // 1. Recolección de Datos de TODOS los campos
     const productData = {
         nombre: form.querySelector('#product-nombre').value,
         descripcion: form.querySelector('#product-descripcion').value,
-        precio: parseFloat(form.querySelector('#product-precio').value),
-        stock: parseInt(form.querySelector('#product-stock').value, 10),
+        precio: sanitizeNumber(form.querySelector('#product-precio').value),
+        stock: Math.floor(sanitizeNumber(form.querySelector('#product-stock').value)),
         categoria: form.querySelector('#product-categoria').value,
         imagen: form.querySelector('#product-imagen').value
     };
