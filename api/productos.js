@@ -52,13 +52,10 @@ const handler = async (event, context) => {
                 const productos = data.records.map(record => {
                     const fields = record.fields;
                     
-                    let stockValue = fields['# Stock'];
+                    let stockValue = fields.Stock;
 
-                    if (typeof stockValue === 'string') {
-                        // Reemplaza la coma decimal por punto, luego convierte a entero
-                        stockValue = stockValue.replace(',', '.'); 
-                    }
-                    const stockLimpio = parseInt(stockValue, 10) || 0;
+                    
+                    const stockLimpio = parseInt(stockValue) || 0;
                     // Asume que URL_Imagen es un string directo (por tu última configuración)
                     const imageUrl = fields.URL_Imagen ? fields.URL_Imagen : 'URL_IMAGEN_FALLBACK_SI_NO_HAY'; 
                     
