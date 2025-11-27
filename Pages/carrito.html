@@ -1,102 +1,40 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Tu Carrito de Compras - Gamepad Retro</title>
-  
-  <link rel="stylesheet" href="../styles.css" /> 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalle del Producto</title>
+    <link rel="stylesheet" href="../styles.css">
 </head>
-<body>
+<main class="carrito-main">
+    <h1>Tu Carrito de Compras</h1>
 
-  <header>
-    <div class="logo">
-      <a href="../index.html">
-        <img src="../Images/Logo.png" alt="Logo Retro" />
-      </a>
-    </div>
-
-    <div class="search-bar">
-      <input type="text" placeholder="Buscar joystick..." />
-      <button class="btn-buscar" aria-label="Buscar">🔍</button>
-    </div>
-
-    <nav class="navbar">
-      <ul class="menu">
-        <li><a href="../index.html">Inicio</a></li>
-        <li class="dropdown">
-          <a href="#">Joysticks ▾</a>
-          <ul class="dropdown-content">
-            <li><a href="Pages/playstation.html">Playstation</a></li>
-            <li><a href="Pages/xbox.html">Xbox</a></li>
-            <li><a href="Pages/nintendo.html">Nintendo</a></li>
-            <li><a href="Pages/retro.html">Retro</a></li>
-            <li><a href="Pages/arcade.html">Arcade</a></li>
-          </ul>
-        </li>
-        <li><a href="Pages/about.html">Acerca de</a></li>
-        <li><a href="Pages/faq.html">Preguntas Frecuentes (FAQ)</a></li>
-      </ul>
-    </nav>
-    
-    <a href="login.html" class="login-link" title="Acceso de Administrador">
-        <span class="icono">🔑 Acceder</span>
-    </a>
-  </header>
-  
-  <div class="content-wrapper">
-
-    <main class="carrito-main">
-        <h2>Tu Carrito de Compras</h2>
+    <div class="carrito-contenido">
         
-        <section class="carrito-contenido">
-            
-            <div class="carrito-lista">
-                <table id="tabla-carrito" class="tabla-carrito">
-                    <thead>
-                        <tr>
-                            <th>Producto</th>
-                            <th>Precio Unitario</th>
-                            <th>Cantidad</th>
-                            <th>Subtotal</th>
-                            <th>Eliminar</th>
-                        </tr>
-                    </thead>
-                    <tbody id="carrito-body">
-                        </tbody>
-                </table>
-                <div id="carrito-lista" style="display: none;"></div> 
-            </div>
-
-            <div class="carrito-resumen">
-                <h3>Resumen del Pedido</h3>
-                <div class="resumen-detalle">
-                    <p>Subtotal: <span id="resumen-subtotal">$0.00</span></p>
-                    <p>Envío: <span id="resumen-envio">Gratis</span></p>
-                    <h4>Total: <span id="resumen-total">$0.00</span></h4>
+        <section class="carrito-lista">
+            <div id="carrito-tabla-container">
                 </div>
-                
-                <button id="btn-vaciar" class="btn-cancelar">Vaciar Carrito</button>
-                
-                <button id="btn-checkout" class="btn-guardar">Finalizar Compra</button>
-                
-                <a href="checkout.html" style="display: none;">Finalizar compra</a>
-            </div>
-
         </section>
-    </main>
-    </div> <footer>
-    <p>&copy; 2025 Retro Gamepad - Todos los derechos reservados.</p>
-    <div class="socials">
-        <a href="#">🐦 Twitter</a>
-        <a href="#">📘 Facebook</a>
-        <a href="#">📸 Instagram</a>
-    </div>
-  </footer>
 
-  <script type="module">
-    import { mostrarCarrito } from "../JS/modules/cart.js";
-    mostrarCarrito();
-  </script>
+        <section class="carrito-resumen">
+            <h3>Resumen del Pedido</h3>
+            <div id="resumen-detalle">
+                </div>
+            </section>
+        
+    </div>
+</main>
+
+<script type="module" src="../JS/modules/api.js"></script>
+<script type="module" src="../JS/modules/cart.js"></script>
+<script type="module" src="../JS/modules/cart_render.js"></script>
+
+<script type="module">
+    import { initCartManager } from '../JS/modules/cart.js';
+    import { initCartRender } from '../JS/modules/cart_render.js';
+    
+    initCartManager(); // Inicializa el contador del header y los listeners de "Agregar"
+    initCartRender();  // Carga y renderiza la página completa del carrito
+</script>
 </body>
 </html>

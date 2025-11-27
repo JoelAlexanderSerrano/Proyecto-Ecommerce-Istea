@@ -1,67 +1,78 @@
-import { getProductoById } from "./api.js";
+import { getProductos } from './api.js'; // Función para obtener todos los productos
 
-export async function initDetails() {
-    
-    const contenedor = document.querySelector("#detalle");
-    if (!contenedor) {
-        // Si no estamos en la página de detalle, salimos de la función sin error.
-        return; 
-    }
-    // ----------------------------------------------------
+/**
+ * Función principal para cargar y mostrar el detalle de un solo producto.
+ */
+export async function loadProductDetail() {
+    // 1. Obtener el ID del producto desde la URL (ej: ?id=recQ...)
+    const urlParams = new URLSearchParams(window.location.search);
+    const productId = urlParams.get('id');
 
-    // --- Obtener ID de la URL ---
-    const params = new URLSearchParams(window.location.search);
-    const id = params.get("id");
+    const mainContainer = document.querySelector('#detalle-producto-main');
+    if (!mainContainer) return;
 
-    if (!id) {
-        contenedor.innerHTML = "<p>Error: No se especificó un producto.</p>";
+    // Si no hay ID, o si estamos en la página equivocada
+    if (!productId) {
+        mainContainer.innerHTML = '<h1>Producto no especificado.</h1>';
         return;
     }
 
-    // --- Obtener producto desde API ---
     try {
-        const producto = await getProductoById(id);
+        mainContainer.innerHTML = '<h2>Cargando detalle...</h2>';
 
-        // Si la API devuelve null/undefined o un objeto de error
-        if (!producto || producto.error) {
-            contenedor.innerHTML = "<p>Error: Producto no encontrado.</p>";
+        // 2. Obtener todos los productos de la API (para encontrar el ID)
+        const allProducts = await getProductos();
+        
+        // 3. Buscar el producto específico
+        const product = allProducts.find(p => p.id === productId);
+
+        if (!product) {
+            mainContainer.innerHTML = '<h1>Producto no encontrado.</h1>';
             return;
         }
 
-        // 🚨 MEJORA: Fallback para la URL de la imagen 🚨
-        const imagenSrc = producto.imagen && producto.imagen.length > 0 
-            ? producto.imagen 
-            : './Images/placeholder.png'; 
+        // 4. Formatear datos para la visualización
+        const precioFormato = (product.precio * 1.15).toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        const precioEfectivo = product.precio.toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
-        // --- Render del detalle ---
-        contenedor.innerHTML = `
-            <div class="detalle-container">
-                
-                <div class="detalle-img">
-                    <img src="${imagenSrc}" alt="${producto.nombre}">
-                </div>
-
-                <div class="detalle-info">
-                    <h2>${producto.nombre}</h2>
-
-                    <p class="detalle-precio">$${producto.precio}</p>
-
-                    <p class="detalle-descripcion">
-                        ${producto.descripcion}
-                    </p>
-
-                    <button class="btn agregar" data-id="${producto.id}">
-                        Agregar al carrito
-                    </button>
-
-                    <a href="index.html" class="btn volver">Volver</a>
-                </div>
-
-            </div>
-        `;
+        // 5. Renderizar el HTML del Detalle
+        mainContainer.innerHTML = renderDetailHTML(product, precioFormato, precioEfectivo);
 
     } catch (error) {
-        console.error("Error cargando producto:", error);
-        contenedor.innerHTML = "<p>Error al cargar los datos del producto.</p>";
+        console.error("Fallo al cargar el detalle del producto:", error);
+        mainContainer.innerHTML = '<h1>Error al conectar con la base de datos.</h1>';
     }
+}
+
+/**
+ * Función auxiliar para generar el HTML del detalle.
+ */
+function renderDetailHTML(p, precioLista, precioEfectivo) {
+    return `
+        <div class="detalle-card">
+            
+            <div class="detalle-imagen">
+                <img src="${p.imagen}" alt="${p.nombre}">
+            </div>
+
+            <div class="detalle-info">
+                <h1>${p.nombre}</h1>
+                <p class="descripcion-completa">${p.descripcion}</p>
+                
+                <div class="price-detail-box">
+                    <p class="detalle-list-price">Precio de Lista: $${precioLista}</p>
+                    <p class="detalle-precio">Efectivo/Transferencia: 
+                        <span class="final-price">$${precioEfectivo}</span>
+                    </p>
+                </div>
+                
+                <button class="btn-comprar btn-add-cart" data-id="${p.id}">
+                    Agregar al Carrito
+                </button>
+                
+                <p class="stock-info">Stock disponible: ${p.stock > 0 ? p.stock : 'Agotado'}</p>
+            </div>
+            
+        </div>
+    `;
 }

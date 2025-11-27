@@ -1,63 +1,73 @@
 <!doctype html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title id="product-title">Detalle del Producto</title>
-  <link rel="stylesheet" href="../styles.css" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title id="product-title">Detalle del Producto</title>
+    <link rel="stylesheet" href="../styles.css" />
 </head>
 <body>
 
-  <header>
-    <div class="logo">
-      <a href="../index.html">
-        <img src="../Images/Logo.png" alt="Logo Retro" />
-      </a>
+    <div class="header-bg">
+        <header>
+            <div class="logo">
+                <a href="../index.html">
+                    <img src="../Images/Logo.png" alt="Logo Retro" />
+                </a>
+            </div>
+
+            <nav class="navbar">
+                <ul class="menu">
+                    <li><a href="../index.html">Inicio</a></li>
+                    <li class="dropdown">
+                        <a href="#">Joysticks ▾</a>
+                        <ul class="dropdown-content">
+                            <li><a href="playstation.html">Playstation</a></li>
+                            <li><a href="xbox.html">Xbox</a></li>
+                            <li><a href="nintendo.html">Nintendo</a></li>
+                            <li><a href="retro.html">Retro</a></li>
+                            <li><a href="arcade.html">Arcade</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="about.html">Acerca de</a></li>
+                    <li><a href="faq.html">Preguntas Frecuentes (FAQ)</a></li>
+                </ul>
+            </nav>
+            <a href="login.html" class="login-link" title="Acceso de Administrador">
+                <span class="icono">🔑 Acceder</span>
+            </a>
+            </header>
     </div>
+    
+    <div class="content-wrapper">
 
-    <nav class="navbar">
-      <ul class="menu">
-        <li><a href="index.html">Inicio</a></li>
-        <li class="dropdown">
-          <a href="#">Joysticks ▾</a>
-          <ul class="dropdown-content">
-            <li><a href="Pages/playstation.html">Playstation</a></li>
-            <li><a href="Pages/xbox.html">Xbox</a></li>
-            <li><a href="Pages/nintendo.html">Nintendo</a></li>
-            <li><a href="Pages/retro.html">Retro</a></li>
-            <li><a href="Pages/arcade.html">Arcade</a></li>
-          </ul>
-        </li>
-        <li><a href="Pages/about.html">Acerca de</a></li>
-        <li><a href="Pages/faq.html">Preguntas Frecuentes (FAQ)</a></li>
-      </ul>
-    </nav>
-    <a href="login.html" class="login-link" title="Acceso de Administrador">
-        <span class="icono">🔑 Acceder</span>
-    </a>
-  </header>
-  
-  <div class="content-wrapper">
+        <main id="detalle-producto-main" class="detalle-producto-main">
+            <h1>Cargando detalles...</h1> 
+        </main>
 
-    <main class="detalle-producto-main">
-        <div id="detalle-producto-container" class="detalle-card">
-            
-            <h1>Cargando detalles...</h1>
-
+    </div> <footer>
+        <div class="footer-content">
+            <p>&copy; 2025 Retro Gamepad - Todos los derechos reservados.</p>
+            <div class="socials">
+                <a href="#">🐦 Twitter</a>
+                <a href="#">📘 Facebook</a>
+                <a href="#">📸 Instagram</a>
+            </div>
         </div>
-    </main>
+    </footer>
 
-  </div>
-
-  <footer>
-    <p>&copy; 2025 Retro Gamepad - Todos los derechos reservados.</p>
-    <div class="socials">
-      <a href="#">🐦 Twitter</a>
-      <a href="#">📘 Facebook</a>
-      <a href="#">📸 Instagram</a>
-    </div>
-  </footer>
-
-  <script type="module" src="../JS/detalle.js"></script> 
+    <script type="module" src="../JS/modules/details.js"></script>
+    <script type="module" src="../JS/modules/cart.js"></script> 
+    
+    <script type="module">
+        import { loadProductDetail } from '../JS/modules/details.js';
+        import { initCartManager } from '../JS/modules/cart.js'; 
+        
+        // 1. Carga el detalle del producto (lee el ID de la URL)
+        loadProductDetail(); 
+        
+        // 2. Inicializa la lógica del carrito (para el botón "Agregar al Carrito")
+        initCart(); 
+    </script>
 </body>
 </html>
