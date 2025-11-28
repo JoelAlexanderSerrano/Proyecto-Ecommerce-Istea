@@ -7,433 +7,394 @@
 /* Reset universal */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
-html{
-  height: 100%;
+html {
+    height: 100%;
 }
 
 body {
-  min-height: 100%;
-  display: flex;
-  flex-direction: column;
-  font-family: Arial, sans-serif;
-  line-height: 1.6;
-  background: #FFFFFF; 
-  color: #333; /* Texto principal oscuro */
+    /* CLAVE: Sticky Footer en Flexbox */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background: #f4f4f4; /* Fondo claro del cuerpo de la página */
+    color: #333; 
 }
 
 .content-wrapper {
-  flex-grow: 1; 
-  display: flex;
-  flex-direction: column;
-  max-width: 100%; /* Ancho máximo del contenido centrado */
-  width: 100%;
-  margin: 0 auto; /* Centrado horizontal */
+    flex-grow: 1; /* CLAVE: Empuja el footer hacia abajo */
+    display: flex;
+    flex-direction: column;
+    max-width: 1200px; /* Ancho máximo para el contenido centrado */
+    width: 100%;
+    margin: 0 auto; /* Centrado horizontal */
 }
 
 
 /*
 ====================================
- 2. HEADER Y NAVEGACIÓN
+ 2. HEADER Y NAVEGACIÓN (RESPONSIVE)
 ====================================
 */
 
+/* 🚨 FONDO EXTERNO: Cubre 100% de la ventana 🚨 */
+.header-bg {
+    background-color: #121212; /* Fondo Negro */
+    border-bottom: 5px solid #D6336C; /* Borde de acento Magenta/Rosa fuerte */
+    width: 100%;
+    
+    /* Contenedor Flex para las dos barras: header y nav */
+    display: flex; 
+    flex-direction: column;
+    align-items: center; /* Centra el contenido */
+}
+
+/* HEADER INTERNO (FILA SUPERIOR: Logo, Búsqueda, Iconos) */
 header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  
-  /* BARRA OSCURA */
-  background-color: #1c1c1c; 
-  
-  padding: 10px 24px;
-  border-bottom: 3px solid white;
-  gap: 12px;
-  flex-wrap: wrap;
-  
-  /* CENTRADO HORIZONTAL DEL HEADER */
-  max-width: 100%; 
-  width: 100%;
-  margin: 0 auto;
+    background-color: transparent; 
+    max-width: 1200px; 
+    width: 100%;
+    margin: 0 auto; /* Centra el header */
+    
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 24px;
+    gap: 12px;
+    flex-wrap: wrap;
 }
 
-/* Logo */
+/* Logo (Alineación y Tamaño) */
+.logo { 
+    align-items: center; 
+    display: flex;
+    top: 25px;
+    margin-right: auto;
+    padding-right: 80px;
+    position: relative;
+    z-index: 100;
+}
 .logo img {
-  width: 120px;
-  height: 120px;
-  display: block;
-  border-radius: 50%;
-  object-fit: cover;
+    width: 80px; /* Tamaño final acordado */
+    height: 80px;
+    display: block;
+    border-radius: 50%;
+    object-fit: cover;
 }
+.logo span { color: white; font-weight: bold; font-size: 1.5rem; margin-left: 10px; }
 
-/* Search */
+/* Search Bar */
 .search-bar {
-  flex: 1 1 420px;
-  display: flex;
-  justify-content: center;
-  gap: 6px;
-  min-width: 200px;
+    flex: 1 1 300px; 
+    display: flex;
+    justify-content: center; 
+    gap: 0; 
+    min-width: 200px;
 }
 
 .search-bar input {
-  width: 100%;
-  max-width: 640px;
-  padding: 10px 12px;
-  border-radius: 25px 0 0 25px;
-  border: none;
-  outline: none;
-  font-size: 14px;
+    width: 100%;
+    max-width: 400px;
+    padding: 8px 12px;
+    border-radius: 25px 0 0 25px;
+    background-color: #f8f8f8;
+    color: #333;
+    border: none;
+    outline: none;
+    font-size: 14px;
 }
 
 .search-bar button {
-  padding: 10px 14px;
-  border-radius: 0 25px 25px 0;
-  border: none;
-  background: #f39c12;
-  color: white;
-  cursor: pointer;
-  font-size: 16px;
+    padding: 8px 14px;
+    border-radius: 0 25px 25px 0;
+    background: #D6336C; /* Botón de búsqueda Magenta */
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
 }
+.search-bar button:hover { background: #b32a59; }
 
-.search-bar button:hover { background: #e67e22; }
-
-/* Menu / Navbar */
+/* Menú Hamburguesa */
 .menu-icon { display: none; cursor: pointer; font-size: 28px; color: white; background: none; border: none; padding: 6px 8px; }
-
 #menu-toggle { display: none; }
 
-.navbar { 
-  flex: 0 1 auto; 
-  margin-right: 80px;
+/* NAVBAR (FILA INFERIOR DE ENLACES) */
+.navbar {
+    width: 100%; 
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex; /* Para centrar el UL */
+    justify-content: center;
+    background: #111; 
 }
 
 .menu {
-  list-style: none;
-  display: flex;
-  gap: 18px;
-  margin: 0;
-  padding: 0;
-  align-items: center;
-  background: #111;
-  border-radius: 6px;
-  overflow: visible;
+    list-style: none;
+    display: flex;
+    gap: 10px; 
+    padding: 5px 0; 
+    align-items: center;
+    background: transparent;
 }
 
-.menu > li { position: relative; }
+.menu > li { 
+    position: relative; 
+}
+
 .menu > li > a {
-  display: block;
-  padding: 12px 18px;
-  color: white;
-  text-decoration: none;
-  font-weight: bold;
-  white-space: nowrap;
+    display: block;
+    padding: 10px 14px;
+    color: white;
+    text-decoration: none;
+    font-weight: normal;
+    white-space: nowrap;
 }
 
 .menu > li > a:hover {
-  background: #ff9800;
-  border-radius: 5px;
+    color: #D6336C; 
 }
 
 /* Submenu */
 .dropdown-content {
-  display: none;
-  position: absolute;
-  top: 100%;
-  left: 0;
-  background: #222;
-  min-width: 160px;
-  border-radius: 6px;
-  box-shadow: 0 6px 14px rgba(0,0,0,0.4);
-  z-index: 99;
+    display: none; 
+    position: absolute; 
+    top: 100%; 
+    left: 0;  
+    background: #222; 
+    list-style: none; 
+    padding: 5px 0; 
+    min-width: 140px;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+    z-index: 99;
 }
 
-.dropdown-content li { display: block; }
+.dropdown-content li { 
+    display: block; 
+}
+
 .dropdown-content li a {
-  display: block;
-  padding: 10px 14px;
-  color: #fff;
-  text-decoration: none;
-}
-.dropdown-content li a:hover { background: #ff9800; color: #000; }
-
-@media (hover: hover) and (min-width: 769px) {
-  .dropdown:hover .dropdown-content { display: block; }
+    display: block;
+    padding: 8px 15px;
+    color: #f0f0f0; /* Color de texto claro */
+    text-decoration: none;
 }
 
-/* carrito */
-.carrito { 
-  font-size: 1.5rem; 
-  cursor: pointer; 
-  color: white; 
-  padding: 6px; 
-  margin-right: 80px;
-  position: relative;
+.dropdown-content li a:hover { background: #D6336C; color: #fff; }
+
+.dropdown-content.open {
+    display: block !important;
 }
 
-/* Contador carrito */
-.carrito .contador {
-  position: absolute;
-  top: -6px;
-  right: -10px;
-  background: red;
-  color: white;
-  font-size: 12px;
-  font-weight: bold;
-  border-radius: 50%;
-  padding: 2px 6px;
-  min-width: 18px;
-  text-align: center;
-  line-height: 1.2;
-}
+@media (hover: hover) and (min-width: 769px) { .dropdown:hover .dropdown-content { display: block; } }
+
+/* Carrito y Login */
+.login-link, .carrito { color: white; font-size: 1.2rem; text-decoration: none; margin-left: 15px; }
+.carrito .contador { background: #D6336C; color: white; /* ... */ }
 
 
-/*
-====================================
- 3. RESPONSIVE (Mobile)
-====================================
-*/
+/* ===== RESPONSIVE (mobile) ===== */
 
 @media (max-width: 768px) {
-  header { 
-    padding: 10px 14px; 
-    max-width: none;
-    margin: 0;
-  }
+    header { 
+        padding: 10px 14px; 
+        max-width: none;
+        margin: 0;
+    }
 
-  .menu-icon { display: block; order: 2; }
-  
-  .banner {
-    display: none;
-  }
+    /* Estructura de iconos en móvil */
+    .menu-icon { display: block; order: 1; color: white; font-size: 2rem; }
+    .logo { order: 2; margin: 0; padding-right: 0; /* Resetear margin auto del logo */ }
+    .carrito { order: 3; margin-right: 0;}
 
-  .search-bar {
-    order: 3;
+    /* Búsqueda y Navegación */
+    .search-bar { order: 4; width: 100%; padding: 6px 0; }
+    .navbar { order: 5; width: 100%; display: none; }
+    
+    #menu-toggle:checked + .menu-icon + .navbar { display: block; } 
+    .menu { flex-direction: column; width: 100%; background: #111; }
+    
+    /* Contenido */
+    .content-wrapper { padding: 0 10px; }
+    .banner { height: 200px; margin: 10px auto; }
+}
+
+
+/*
+====================================
+ 3. BANNER / SLIDER
+====================================
+*/
+
+.banner {
     width: 100%;
-    justify-content: stretch;
-    padding: 6px 0;
-  }
-  .search-bar input { border-radius: 25px 0 0 25px; width: 100%; }
-  .search-bar button { border-radius: 0 25px 25px 0; }
+    height: 400px; 
+    max-width: 1200px; 
+    margin: 20px auto; 
+    overflow: hidden;
+    position: relative;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    background-color: #333; /* Color de fondo si la imagen falla */
+}
 
-  .navbar { order: 4; width: 100%; margin-right: 0; }
-  .menu {
-    display: none;
-    flex-direction: column;
-    gap: 0;
-    background: #111;
+.banner .slide {
+    position: absolute; 
+    top: 0;
+    left: 0;
     width: 100%;
-  }
-  
-  .menu.menu-open {
-    display: flex !important;
-  }
+    height: 100%;
+    opacity: 0;
+    z-index: 1; 
+    transition: opacity 2s ease-in-out; 
+}
 
-  #menu-toggle:checked + .menu-icon + .navbar .menu {
-    display: flex;
-  }
+.banner .slide.active {
+    display: block; /* Muestra el contenedor de la diapositiva */
+    opacity: 1; /* La hace completamente visible */
+    z-index: 2;
+}
 
-  .menu > li > a {
-    padding: 14px 18px;
-    border-bottom: 1px solid #222;
-    text-align: left;
-  }
+.banner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Recorta la imagen para ajustarla */
+}
 
-  .dropdown-content {
-    position: static;
-    display: none;
-    box-shadow: none;
-    border-radius: 0;
-    background: #222;
-  }
+.banner .prev, .banner .next {
+cursor: pointer;
+position: absolute;
+top: 50%;
+transform: translateY(-50%);
+width: auto;
+padding: 16px;
+color: #CC0055;
+font-weight: bold;
+font-size: 20px;
+transition: 0.6s ease;
+border-radius: 0 3px 3px 0;
+user-select: none;
+background-color: rgba(0,0,0,0.05);
+border: none;
+z-index: 10;
+}
 
-  .dropdown:focus-within .dropdown-content { display: flex; flex-direction: column; }
+.banner .next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+}
 
-  .carrito { order: 5; margin-top: 6px; margin-right: 0;}
+.banner .prev {
+    left: 0;
+}
+
+.banner .prev:hover, .banner .next:hover {
+    background-color: rgba(0,0,0,0.8);
+}
+
+.slider-controls {
+    position: absolute; /* CLAVE: Posiciona los puntos sobre el banner */
+    bottom: 10px;
+    width: 100%;
+    text-align: center;
+    z-index: 10;
+}
+
+.slider-controls .dot {
+    cursor: pointer;
+    height: 15px;
+    width: 15px;
+    margin: 0 2px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.6s ease;
+    border: none; /* Asegurar que no tengan borde */
+}
+
+.slider-controls .dot.active, .slider-controls .dot:hover {
+    background-color: #D6336C; /* Color de acento para el dot activo */
 }
 
 /*
 ====================================
- 4. SECCIÓN PRODUCTOS
+ 4. SECCIÓN PRODUCTOS Y CARDS
 ====================================
 */
 
-.productos {
-  padding: 50px 24px;
-  text-align: center;
-  /* Fondo claro para que las tarjetas resalten */
-  background: #fff; 
-}
+.productos { padding: 50px 24px; text-align: center; background: #FFFFFF; }
+.productos h2 { font-size: 2.2rem; margin-bottom: 25px; color: #222; text-transform: uppercase; }
 
-.productos h2 {
-  font-size: 2.2rem;
-  margin-bottom: 25px;
-  color: #222;
-  text-transform: uppercase;
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 24px;
-}
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; }
 
 .producto {
-  /* TARJETA BLANCA SOBRE FONDO CLARO */
-  background: white; 
-  padding: 20px;
-  border-radius: 8px; 
-  
-  /* Sombra sutil para hacerla flotar */
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
-  
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  color: #333; /* Asegura que el texto dentro sea legible */
+  background: white; padding: 20px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); transition: transform 0.3s ease, box-shadow 0.3s ease; display: flex; flex-direction: column; justify-content: space-between; color: #333;
 }
 
-.producto:hover {
-  transform: translateY(-4px); 
-  /* Sombra de acento naranja al hacer hover */
-  box-shadow: 0 8px 15px rgba(255,152,0,0.2); 
-}
+.producto:hover { transform: translateY(-4px); box-shadow: 0 8px 15px rgba(0,0,0,0.1); }
 
-.producto img {
-  width: 100%;
-  max-height: 220px;
-  object-fit: contain;
-  margin-bottom: 14px;
-  border-radius: 10px;
-}
+.producto img { width: 100%; max-height: 220px; object-fit: contain; margin-bottom: 14px; border-radius: 10px; }
+.producto h3 { font-size: 1.1rem; margin-bottom: 10px; color: #333; }
 
-.producto h3 {
-  font-size: 1.1rem;
-  margin-bottom: 10px;
-  color: #333;
-}
+/* PRECIOS (ESTILO COMPRAGAMER) */
+.price-box { text-align: left; margin: 10px 0; }
+.list-price { font-size: 0.95rem; color: #888; text-decoration: line-through; font-weight: normal; }
+.effective-price { font-size: 1.5rem; font-weight: bold; color: #CC0055; margin-top: 5px; margin-bottom: 10px; }
 
-.producto .precio {
-  /* PRECIO DESTACADO (NARANJA) */
-  font-weight: bold;
-  margin-bottom: 12px;
-  color: #ff9800; 
-  font-size: 1.4rem;
-  display: block;
-}
+.btn-add-cart { background: #D6336C; color: white; padding: 10px 16px; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; transition: background 0.2s ease; margin-top: 10px; }
+.btn-add-cart:hover { background: #b32a59; }
 
-.producto button {
-  /* Botón de llamada a la acción */
-  background: #ff9800;
-  border: none;
-  color: #111; /* Texto negro para contraste en botón naranja */
-  padding: 10px 16px;
-  border-radius: 4px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: background 0.2s ease;
-  margin-top: 10px;
-}
+.ver-detalle { display: block; margin-top: 8px; color: #007bff; text-decoration: none; font-size: 0.9rem; }
+.ver-detalle:hover { text-decoration: underline; }
 
-.producto button:hover {
-  background: #e67e22;
-}
+/* ESTILOS DE SECCIÓN EN CONSTRUCCIÓN */
+.en-construccion { text-align: center; padding: 60px 20px; margin: 40px auto; max-width: 800px; background: #fdfdfd; border-radius: 10px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); }
+.en-construccion h1 { font-size: 2.8rem; color: #CC0055; margin-bottom: 25px; }
 
-/* Regla para el enlace "Ver detalle" */
-.ver-detalle {
-    display: block;
-    margin-top: 8px;
-    color: #007bff;
-    text-decoration: none;
-    font-size: 0.9rem;
-}
-
-.ver-detalle:hover {
-    text-decoration: underline;
-}
 
 /*
 ====================================
- 5. FOOTER Y OTRAS SECCIONES
+ 5. FOOTER Y PÁGINAS FIJAS
 ====================================
 */
 
-/* ===== FOOTER (BARRA DE BORDE A BORDE) ===== */
+/* FOOTER EXTERNO: Barra de borde a borde */
 footer {
-  background: #111;
+  background: #1c1c1c; 
   color: #eee;
   padding: 20px 10px;
-  width: 100%; /* CLAVE: Ocupa el 100% del ancho del viewport */
+  width: 100%; 
 }
 
 /* FOOTER INTERNO: Limita el ancho y centra el contenido */
 .footer-content {
-  max-width: 100%;
+  max-width: 1200px;
   margin: 0 auto;
   text-align: center;
 }
 
-footer p {
-  margin-bottom: 10px;
-  font-size: 0.9rem;
-}
-
 footer .socials a {
-  color: #ff9800;
-  margin: 0 10px;
-  text-decoration: none;
-  font-weight: bold;
+  color: #D6336C;
 }
 
-footer .socials a:hover {
-  text-decoration: underline;
-}
-
-/* Otras secciones (About, FAQ, Login) deben mantener sus estilos de fondo blanco para consistencia */
-.about, .faq, .login-main, .admin-main {
-    background: #fff; /* Asegura el fondo blanco/claro en el contenido */
-}
-
-/*
-====================================
-ESTILOS ESPECÍFICOS PARA ADMIN.HTML 
-====================================
-*/
-
-.admin-main {
+/* Estilos de Login/Admin/Detalle */
+.about, .faq, .login-main, .admin-main, .producto-detalle-main {
+    background: #fff;
+    padding: 40px 24px;
     max-width: 1200px;
-    margin: 40px auto;
-    padding: 20px;
+    margin: 20px auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
 }
 
-.btn-logout {
-    background-color: #CC0055; /* Rojo de acento */
-    color: white;
-    padding: 8px 15px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-weight: bold;
-}
-
-.admin-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.admin-table th, .admin-table td {
-    padding: 12px 15px;
-    border: 1px solid #ddd;
-    text-align: left;
-}
-
-.admin-table th {
-    background-color: #f4f4f4;
-}
-
-.admin-table .action-btn {
-    margin-right: 5px;
-    padding: 5px 10px;
-    cursor: pointer;
+/* Estilos de tabla de administración (Responsivo) */
+@media (max-width: 768px) {
+    .admin-table, .admin-table tbody, .admin-table td, .admin-table th { display: block; }
+    .admin-table thead { display: none; }
+    .admin-table tr { margin-bottom: 15px; border: 1px solid #ddd; display: block; padding: 10px; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+    .admin-table td { border: none; position: relative; padding-left: 50%; text-align: right; }
+    .admin-table td::before { content: attr(data-label); position: absolute; left: 6px; width: 45%; padding-right: 10px; white-space: nowrap; text-align: left; font-weight: bold; color: #555; }
+    .admin-table td:last-child { text-align: center; }
 }

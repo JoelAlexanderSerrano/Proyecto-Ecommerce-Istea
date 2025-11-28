@@ -1,4 +1,5 @@
 export function initSearch() {
+  console.log("Search Bar inicializada.");
   const input = document.querySelector('.search-bar input');
   const boton = document.querySelector('.search-bar .btn-buscar');
 

@@ -1,54 +1,66 @@
-// modules/slider.js
-export function initSlider({ interval = 3000 } = {}) {
-  const slides = document.querySelectorAll('.slide');
-  const prevBtn = document.querySelector('.prev');
-  const nextBtn = document.querySelector('.next');
-  const dots = document.querySelectorAll('.dot');
+export function initSlider({ interval = 4000 } = {}) {
+    console.log("Slider inicializado.");
+    const slides = document.querySelectorAll('.banner .slide');
+    const dots = document.querySelectorAll('.slider-controls .dot');
+    const prevButton = document.querySelector('.prev');
+    const nextButton = document.querySelector('.next');
+    
+    // Si no hay slides o botones, salimos
+    if (!slides.length || !nextButton || !prevButton) {
+      console.error("Error: Slider no encontró los elementos clave (Slides o Botones).");
+      return; 
+    }
+    
+    let currentSlide = 0;
+    const totalSlides = slides.length;
+    let slideInterval; // Variable para controlar el autoplay
 
-  if (!slides.length) return; // sale si no hay slides
+    // Mostrar la slide y actualizar dots
+    function showSlide(index) {
+        // Asegura que el índice esté dentro del rango
+        index = (index + totalSlides) % totalSlides;
+        
+        slides.forEach((slide, i) => {
+            slide.classList.toggle('active', i === index);
+        });
+        dots.forEach((dot, i) => {
+            dot.classList.toggle('active', i === index);
+        });
+        currentSlide = index;
+    }
 
-  let current = 0;
-  const total = slides.length;
-  let slideInterval;
+    // Siguiente slide
+    function nextSlide() {
+        showSlide(currentSlide + 1);
+    }
 
-  // Mostrar la slide y actualizar dots
-  function showSlide(index) {
-    slides.forEach((slide, i) => {
-      slide.classList.toggle('active', i === index);
-      dots[i]?.classList.toggle('active', i === index);
+    // Resetear intervalo al interactuar
+    function resetInterval() {
+        clearInterval(slideInterval);
+        slideInterval = setInterval(nextSlide, interval);
+    }
+
+    // Event Listeners para interacción
+    nextButton.addEventListener('click', () => { 
+        nextSlide(); 
+        resetInterval(); // Reinicia el contador al presionar
     });
-    current = index;
-  }
-
-  // Siguiente slide
-  function nextSlide() {
-    showSlide((current + 1) % total);
-  }
-
-  // Anterior slide
-  function prevSlide() {
-    showSlide((current - 1 + total) % total);
-  }
-
-  // Resetear intervalo al interactuar
-  function resetInterval() {
-    clearInterval(slideInterval);
-    slideInterval = setInterval(nextSlide, interval);
-  }
-
-  // Botones
-  nextBtn?.addEventListener('click', () => { nextSlide(); resetInterval(); });
-  prevBtn?.addEventListener('click', () => { prevSlide(); resetInterval(); });
-
-  // Dots
-  dots.forEach(dot => {
-    dot.addEventListener('click', () => {
-      showSlide(Number(dot.dataset.slide));
-      resetInterval();
+    
+    prevButton.addEventListener('click', () => { 
+        showSlide(currentSlide - 1); // Llama a showSlide con el índice anterior
+        resetInterval(); // Reinicia el contador al presionar
     });
-  });
 
-  // Inicializar
-  showSlide(0);
-  slideInterval = setInterval(nextSlide, interval);
+    dots.forEach(dot => {
+        dot.addEventListener('click', (e) => {
+            const slideIndex = parseInt(e.target.dataset.slide);
+            showSlide(slideIndex);
+            resetInterval();
+        });
+    });
+    
+    if (slides.length > 0) {
+        showSlide(currentSlide);
+        slideInterval = setInterval(nextSlide, interval); // Inicia el movimiento automático
+    }
 }

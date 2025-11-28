@@ -1,11 +1,30 @@
 import { getProductos } from './api.js'; 
 
-const LIMITE_DESTACADOS = 5; 
+const LIMITE_DESTACADOS = 8; 
 
-// 🚨 MODIFICACIÓN: La función ahora acepta el parámetro de búsqueda 🚨
+/**
+ * Función que devuelve el HTML para la página "En Construcción".
+ * Usa las clases que ya tienes definidas en styles.css.
+ */
+function renderEnConstruccion(categoria) {
+    return `
+        <div class="en-construccion">
+            <div class="intro">
+                <h1>🛠️ SECCIÓN ${categoria.toUpperCase()} EN CONSTRUCCIÓN 🛠️</h1>
+            </div>
+            <p class="mensaje">
+                Estamos trabajando duro para traer los mejores productos de esta categoría. 
+                Vuelve pronto.
+            </p>
+            <img src="./Images/en_construccion.png" alt="En construcción" class="imagen-construccion">
+        </div>
+    `;
+}
+
+// 🚨 La función ahora acepta el filtro de búsqueda 🚨
 export async function cargarProductos(filtroCategoria = null, busquedaFiltro = null) {
   
-    // 1. Obtener datos de la API (Netlify)
+    // 1. Obtener datos de la API (Airtable)
     let productos = [];
     try {
         productos = await getProductos(); 
@@ -21,7 +40,7 @@ export async function cargarProductos(filtroCategoria = null, busquedaFiltro = n
     
     if (!contenedor) return;
 
-    contenedor.innerHTML = ""; // Limpiar antes de renderizar
+    contenedor.innerHTML = ""; 
 
     // 2. Lógica de Filtrado (Aplicar Categoría y Búsqueda)
     let productosAMostrar = productos;
@@ -33,10 +52,9 @@ export async function cargarProductos(filtroCategoria = null, busquedaFiltro = n
         tituloFiltro = `${filtroCategoria}s`; // Ejemplo: "Playstations"
     }
     
-    // --- B. Aplicar la Búsqueda (sobre los resultados anteriores) ---
+    // --- B. Aplicar la Búsqueda ---
     if (busquedaFiltro) {
         const query = busquedaFiltro.toLowerCase();
-        // Filtra si el nombre o la descripción del producto incluyen la consulta
         productosAMostrar = productosAMostrar.filter(p => 
             p.nombre.toLowerCase().includes(query) || 
             p.descripcion.toLowerCase().includes(query)
@@ -50,8 +68,17 @@ export async function cargarProductos(filtroCategoria = null, busquedaFiltro = n
         tituloFiltro = 'Productos Destacados';
     }
 
-    // 3. Manejo de errores de resultados
+    // 3. Manejo de errores y LÓGICA DE 'EN CONSTRUCCIÓN' 🚨
     if (productosAMostrar.length === 0) {
+        
+        // 🚨 PRIORIDAD: Mostrar sección "En Construcción" para categorías específicas
+        if (filtroCategoria === 'Retro' || filtroCategoria === 'Arcade') {
+            contenedor.innerHTML = renderEnConstruccion(filtroCategoria); 
+            if (tituloH2) tituloH2.textContent = `Sección ${filtroCategoria}`;
+            return; 
+        }
+
+        // Si es una búsqueda o una categoría normal vacía, mostramos el mensaje simple
         const mensaje = `No se encontraron productos para ${tituloFiltro}.`;
         contenedor.innerHTML = `<p>${mensaje}</p>`;
         if (tituloH2) tituloH2.textContent = tituloFiltro;
@@ -68,8 +95,6 @@ export async function cargarProductos(filtroCategoria = null, busquedaFiltro = n
     let htmlContent = productosAMostrar.map(p => {
         
         const precioBase = parseFloat(p.precio) || 0; 
-        
-        // Simulación: Precio de Lista (+15% de ejemplo)
         const precioListaCalculado = (precioBase * 1.15); 
         const precioEfectivo = precioBase; 
 

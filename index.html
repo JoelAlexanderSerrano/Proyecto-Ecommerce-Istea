@@ -1,105 +1,105 @@
 <!doctype html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Gamepad Retro</title>
-  <link rel="stylesheet" href="./styles.css" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Gamepad Retro</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./styles.css" />
 </head>
 <body>
 
-  <header>
-    <div class="logo">
-      <a href="index.html">
-      <img src="Images/Logo.png" alt="Logo Retro" />
-      </a>
-    </div>
-
-    <div class="search-bar">
-      <input type="text" placeholder="Buscar joystick..." />
-      <button class="btn-buscar" aria-label="Buscar">🔍</button>
-    </div>
-
-    <!-- checkbox + label (hamburguesa) - sin JS -->
-    <input type="checkbox" id="menu-toggle" />
-    <label for="menu-toggle" class="menu-icon" aria-hidden="true">☰</label>
-
-    <nav class="navbar">
-    <ul class="menu">
-        <li><a href="index.html">Inicio</a></li>
-        <li class="dropdown">
-            <a href="#">Joysticks ▾</a>
-            <ul class="dropdown-content">
-                <li><a href="Pages/playstation.html">Playstation</a></li>
-                <li><a href="Pages/xbox.html">Xbox</a></li>
-                <li><a href="Pages/nintendo.html">Nintendo</a></li>
-                <li><a href="Pages/retro.html">Retro</a></li>
-                <li><a href="Pages/arcade.html">Arcade</a></li>
-            </ul>
-        </li>
-        <li><a href="Pages/about.html">Acerca de</a></li>
-        <li><a href="Pages/faq.html">Preguntas Frecuentes (FAQ)</a></li>
+    <div class="header-bg">
         
-        <li class="menu-acceso-integrado">
-            <a href="Pages/login.html" class="btn-login-header" title="Acceso de Administrador">
-                Log in
+        <header>
+            <div class="logo">
+                <a href="index.html">
+                    <img src="Images/Logo.png" alt="Logo Retro" />
+                </a>
+            </div>
+
+            <div class="search-bar">
+                <input type="text" placeholder="Buscar joystick..." />
+                <button class="btn-buscar" aria-label="Buscar">🔍</button>
+            </div>
+            
+            <input type="checkbox" id="menu-toggle" />
+            <label for="menu-toggle" class="menu-icon" aria-hidden="true">☰</label>
+
+            <a href="Pages/login.html" class="login-link" title="Acceso de Administrador">
+                <span class="icono">🔑 Ingresar</span>
             </a>
-        </li>
-        </ul>
-</nav>
+            
+            <a href="./pages/carrito.html" class="carrito" title="Ver Carrito">
+                <span class="icono">🛒</span>
+                <span class="contador">(0)</span>
+            </a>
+        </header>
 
-<a href="./pages/carrito.html" class="carrito" title="Ver Carrito">
-    <span class="icono">🛒</span>
-    <span class="contador">(0)</span>
-</a>
+        <nav class="navbar">
+            <ul class="menu">
+                <li><a href="index.html">Inicio</a></li>
+                <li class="dropdown">
+                    <a href="#">Joysticks ▾</a>
+                    <ul class="dropdown-content">
+                        <li><a href="index.html?categoria=Playstation" class="nav-link" data-categoria="Playstation">Playstation</a></li>
+                        <li><a href="index.html?categoria=Xbox" class="nav-link" data-categoria="Xbox">Xbox</a></li>
+                        <li><a href="index.html?categoria=Nintendo" class="nav-link" data-categoria="Nintendo">Nintendo</a></li>
+                        <li><a href="index.html?categoria=Retro" class="nav-link" data-categoria="Retro">Retro</a></li>
+                        <li><a href="index.html?categoria=Arcade" class="nav-link" data-categoria="Arcade">Arcade</a></li>
+                    </ul>
+                </li>
+                <li><a href="Pages/about.html">Acerca de</a></li>
+                <li><a href="Pages/faq.html">Preguntas Frecuentes (FAQ)</a></li>
+            </ul>
+        </nav>
+    </div> <div class="content-wrapper">
 
-  </header>
-
- <div class="content-wrapper">
-
-<!-- Banner de propagandas -->
 <section class="banner">
-  <div class="slides">
-    <div class="slide active">
-      <img src="Images/banner ps5.webp" alt="Banner PS5">
-    </div>
-    <div class="slide">
-      <img src="Images/banner nintendo.webp" alt="Banner Nintendo">
-    </div>
-    <div class="slide">
-      <img src="Images/banner xbox.png" alt="Banner Xbox">
-    </div>
-  </div>
+    <div class="slides">
+        <div class="slide active">
+            <img src="Images/banner_ps5.webp" alt="Banner PS5"> 
+        </div>
+        <div class="slide">
+            <img src="Images/banner_nintendo.webp" alt="Banner Nintendo"> 
+        </div>
+        <div class="slide">
+            <img src="Images/banner_xbox.png" alt="Banner Xbox"> 
+        </div>
+        </div>
 
-  <!-- Botones manuales -->
-  <button class="prev">&#10094;</button>
-  <button class="next">&#10095;</button>
+    <button class="prev">&#10094;</button>
+    <button class="next">&#10095;</button>
 
-  <!-- Indicadores de slides -->
-  <div class="slider-controls">
-    <button class="dot active" data-slide="0"></button>
-    <button class="dot" data-slide="1"></button>
-    <button class="dot" data-slide="2"></button>
-  </div>
+    <div class="slider-controls">
+        <button class="dot active" data-slide="0"></button>
+        <button class="dot" data-slide="1"></button>
+        <button class="dot" data-slide="2"></button>
+    </div>
 </section>
 
-  <main class="productos">
-  <h2>Productos Destacados</h2>
+        <main class="productos">
+            <h2>Productos Destacados</h2>
+            <div id="lista-productos" class="grid">
+                </div>
+        </main>
 
-  
-  <div id="lista-productos" class="grid"></div>
-</main>
+    </div> <footer>
+        <div class="footer-content">
+            <p>&copy; 2025 Retro Gamepad - Todos los derechos reservados.</p>
+            <div class="socials">
+                <a href="#">🐦 Twitter</a>
+                <a href="#">📘 Facebook</a>
+                <a href="#">📸 Instagram</a>
+            </div>
+        </div>
+    </footer>
 
-  <footer>
-  <div class="footer-content"></div>
-  <p>&copy; 2025 Retro Gamepad - Todos los derechos reservados.</p>
-  <div class="socials">
-    <a href="#">🐦 Twitter</a>
-    <a href="#">📘 Facebook</a>
-    <a href="#">📸 Instagram</a>
-  </div>
-</footer>
-
-  <script type="module" src="./JS/main.js"></script>
+    <script type="module" src="./JS/modules/slider.js"></script>
+    <script type="module" src="./JS/modules/search.js"></script>
+    <script type="module" src="./JS/modules/cart.js"></script>
+    <script type="module" src="./JS/modules/menu.js"></script>
+    
+    <script type="module" src="./JS/main.js"></script>
 </body>
 </html>
