@@ -1,4 +1,4 @@
-import { AIRTABLE_CONFIG } from '../../config.js' 
+import { AIRTABLE_CONFIG } from '../../config.js';
 
 const API_URL = `https://api.airtable.com/v0/${AIRTABLE_CONFIG.baseId}/Productos`;
 

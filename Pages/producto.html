@@ -9,6 +9,7 @@
 <body>
 
     <div class="header-bg">
+        
         <header>
             <div class="logo">
                 <a href="../index.html">
@@ -16,30 +17,42 @@
                 </a>
             </div>
 
-            <nav class="navbar">
-                <ul class="menu">
-                    <li><a href="../index.html">Inicio</a></li>
-                    <li class="dropdown">
-                        <a href="#">Joysticks ▾</a>
-                        <ul class="dropdown-content">
-                            <li><a href="playstation.html">Playstation</a></li>
-                            <li><a href="xbox.html">Xbox</a></li>
-                            <li><a href="nintendo.html">Nintendo</a></li>
-                            <li><a href="retro.html">Retro</a></li>
-                            <li><a href="arcade.html">Arcade</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="about.html">Acerca de</a></li>
-                    <li><a href="faq.html">Preguntas Frecuentes (FAQ)</a></li>
-                </ul>
-            </nav>
+            <div class="search-bar">
+                <input type="text" placeholder="Buscar joystick..." />
+                <button class="btn-buscar" aria-label="Buscar">🔍</button>
+            </div>
+            
+            <input type="checkbox" id="menu-toggle" />
+            <label for="menu-toggle" class="menu-icon" aria-hidden="true">☰</label>
+
             <a href="login.html" class="login-link" title="Acceso de Administrador">
-                <span class="icono">🔑 Acceder</span>
+                <span class="icono">🔑 Ingresar</span>
             </a>
-            </header>
-    </div>
-    
-    <div class="content-wrapper">
+            
+            <a href="carrito.html" class="carrito" title="Ver Carrito">
+                <span class="icono">🛒</span>
+                <span class="contador">(0)</span>
+            </a>
+        </header>
+
+        <nav class="navbar">
+            <ul class="menu">
+                <li><a href="../index.html">Inicio</a></li>
+                <li class="dropdown">
+                    <a href="#">Joysticks ▾</a>
+                    <ul class="dropdown-content">
+                        <li><a href="index.html?categoria=Playstation" class="nav-link" data-categoria="Playstation">Playstation</a></li>
+                        <li><a href="index.html?categoria=Xbox" class="nav-link" data-categoria="Xbox">Xbox</a></li>
+                        <li><a href="index.html?categoria=Nintendo" class="nav-link" data-categoria="Nintendo">Nintendo</a></li>
+                        <li><a href="index.html?categoria=Retro" class="nav-link" data-categoria="Retro">Retro</a></li>
+                        <li><a href="index.html?categoria=Arcade" class="nav-link" data-categoria="Arcade">Arcade</a></li>
+                    </ul>
+                </li>
+                <li><a href="about.html">Acerca de</a></li>
+                <li><a href="faq.html">Preguntas Frecuentes (FAQ)</a></li>
+            </ul>
+        </nav>
+    </div> <div class="content-wrapper">
 
         <main id="detalle-producto-main" class="detalle-producto-main">
             <h1>Cargando detalles...</h1> 

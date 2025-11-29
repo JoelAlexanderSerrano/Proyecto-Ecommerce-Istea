@@ -9,45 +9,51 @@
 </head>
 <body>
 
-  <header>
-    <div class="logo">
-      <a href="../index.html">
-      <img src="../Images/Logo.png" alt="Logo Retro" />
-      </a>
-    </div>
+    <div class="header-bg">
+        
+        <header>
+            <div class="logo">
+                <a href="../index.html">
+                    <img src="../Images/Logo.png" alt="Logo Retro" />
+                </a>
+            </div>
 
-    <div class="search-bar">
-      <input type="text" placeholder="Buscar joystick..." />
-      <button class="btn-buscar" aria-label="Buscar">🔍</button>
-    </div>
+            <div class="search-bar">
+                <input type="text" placeholder="Buscar joystick..." />
+                <button class="btn-buscar" aria-label="Buscar">🔍</button>
+            </div>
+            
+            <input type="checkbox" id="menu-toggle" />
+            <label for="menu-toggle" class="menu-icon" aria-hidden="true">☰</label>
 
-    <!-- checkbox + label (hamburguesa) - sin JS -->
-    <input type="checkbox" id="menu-toggle" />
-    <label for="menu-toggle" class="menu-icon" aria-hidden="true">☰</label>
+            <a href="login.html" class="login-link" title="Acceso de Administrador">
+                <span class="icono">🔑 Ingresar</span>
+            </a>
+            
+            <a href="carrito.html" class="carrito" title="Ver Carrito">
+                <span class="icono">🛒</span>
+                <span class="contador">(0)</span>
+            </a>
+        </header>
 
-    <nav class="navbar">
-      <ul class="menu">
-        <li><a href="../index.html">Inicio</a></li>
-        <li class="dropdown">
-          <a href="#">Joysticks ▾</a>
-          <ul class="dropdown-content">
-            <li><a href="playstation.html">Playstation</a></li>
-            <li><a href="xbox.html">Xbox</a></li>
-            <li><a href="nintendo.html">Nintendo</a></li>
-            <li><a href="retro.html">Retro</a></li>
-            <li><a href="arcade.html">Arcade</a></li>
-          </ul>
-        </li>
-        <li><a href="about.html">Acerca de</a></li>
-        <li><a href="faq.html">Preguntas Frecuentes (FAQ)</a></li>
-      </ul>
-    </nav>
-
-    <div class="carrito" title="Carrito">
-    <span class="icono">🛒</span>
-    <span class="contador">(0)</span>
-    </div>
-   </header>
+        <nav class="navbar">
+            <ul class="menu">
+                <li><a href="../index.html">Inicio</a></li>
+                <li class="dropdown">
+                    <a href="#">Joysticks ▾</a>
+                    <ul class="dropdown-content">
+                        <li><a href="../index.html?categoria=Playstation" class="nav-link" data-categoria="Playstation">Playstation</a></li>
+                        <li><a href="../index.html?categoria=Xbox" class="nav-link" data-categoria="Xbox">Xbox</a></li>
+                        <li><a href="../index.html?categoria=Nintendo" class="nav-link" data-categoria="Nintendo">Nintendo</a></li>
+                        <li><a href="../index.html?categoria=Retro" class="nav-link" data-categoria="Retro">Retro</a></li>
+                        <li><a href="../index.html?categoria=Arcade" class="nav-link" data-categoria="Arcade">Arcade</a></li>
+                    </ul>
+                </li>
+                <li><a href="about.html">Acerca de</a></li>
+                <li><a href="faq.html">Preguntas Frecuentes (FAQ)</a></li>
+            </ul>
+        </nav>
+    </div> <div class="content-wrapper">
   
    <main class="about">
     <section class="intro">
@@ -82,15 +88,16 @@
     </section>
   </main>
 
-  <footer>
-    <div class="footer-content"></div>
-    <p>&copy; 2025 Retro Gamepad - Todos los derechos reservados.</p>
-    <div class="socials">
-      <a href="#">🐦 Twitter</a>
-      <a href="#">📘 Facebook</a>
-      <a href="#">📸 Instagram</a>
-    </div>
-  </footer>
+  </div> <footer>
+        <div class="footer-content">
+            <p>&copy; 2025 Retro Gamepad - Todos los derechos reservados.</p>
+            <div class="socials">
+                <a href="#">🐦 Twitter</a>
+                <a href="#">📘 Facebook</a>
+                <a href="#">📸 Instagram</a>
+            </div>
+        </div>
+    </footer>
 
 </body>
 </html>

@@ -131,6 +131,7 @@ function initCartEventListeners() {
         if (confirm('¿Está seguro de que desea vaciar todo el carrito?')) {
             CartManager.vaciarCarrito();
             renderCart();
+            window.location.href = '../index.html';
         }
     });
     
@@ -139,5 +140,6 @@ function initCartEventListeners() {
         alert("¡Compra finalizada! Gracias por elegirnos.");
         CartManager.vaciarCarrito();
         renderCart();
+        window.location.href = '../index.html';
     });
 }
