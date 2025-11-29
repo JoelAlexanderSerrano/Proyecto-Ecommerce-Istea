@@ -68,21 +68,21 @@ header {
 /* Logo (Alineación y Tamaño) */
 .logo { 
     align-items: center; 
-    display: flex;
-    top: 25px;
-    margin-right: auto;
-    padding-right: 80px;
-    position: relative;
+    display: flex; 
+    position: relative; /* Para el top: 25px */
+    top: 25px; /* Ajuste manual del logo */
     z-index: 100;
+    
+    margin-right: auto; /* Empuja la búsqueda a la derecha */
+    padding-right: 80px; /* Separación visual de la búsqueda */
 }
 .logo img {
-    width: 80px; /* Tamaño final acordado */
+    width: 80px; 
     height: 80px;
     display: block;
     border-radius: 50%;
     object-fit: cover;
 }
-.logo span { color: white; font-weight: bold; font-size: 1.5rem; margin-left: 10px; }
 
 /* Search Bar */
 .search-bar {
@@ -108,7 +108,7 @@ header {
 .search-bar button {
     padding: 8px 14px;
     border-radius: 0 25px 25px 0;
-    background: #D6336C; /* Botón de búsqueda Magenta */
+    background: #D6336C; 
     color: white;
     border: none;
     cursor: pointer;
@@ -125,7 +125,7 @@ header {
     width: 100%; 
     max-width: 1200px;
     margin: 0 auto;
-    display: flex; /* Para centrar el UL */
+    display: flex; 
     justify-content: center;
     background: #111; 
 }
@@ -139,9 +139,7 @@ header {
     background: transparent;
 }
 
-.menu > li { 
-    position: relative; 
-}
+.menu > li { position: relative; }
 
 .menu > li > a {
     display: block;
@@ -152,16 +150,14 @@ header {
     white-space: nowrap;
 }
 
-.menu > li > a:hover {
-    color: #D6336C; 
-}
+.menu > li > a:hover { color: #D6336C; }
 
 /* Submenu */
 .dropdown-content {
     display: none; 
     position: absolute; 
     top: 100%; 
-    left: 0;  
+    left: 0; 
     background: #222; 
     list-style: none; 
     padding: 5px 0; 
@@ -171,137 +167,114 @@ header {
     z-index: 99;
 }
 
-.dropdown-content li { 
-    display: block; 
-}
+.dropdown-content li { display: block; }
 
 .dropdown-content li a {
     display: block;
     padding: 8px 15px;
-    color: #f0f0f0; /* Color de texto claro */
+    color: #f0f0f0; 
     text-decoration: none;
 }
 
 .dropdown-content li a:hover { background: #D6336C; color: #fff; }
 
+/* 🚨 CLAVE JS: Muestra el submenú al hacer click 🚨 */
 .dropdown-content.open {
     display: block !important;
 }
 
 @media (hover: hover) and (min-width: 769px) { .dropdown:hover .dropdown-content { display: block; } }
 
-/* ===== ESTILOS PARA LA PÁGINA DEL CARRITO (carrito.html) ===== */
+/* Carrito y Login */
+.login-link { color: white; font-size: 1.2rem; text-decoration: none; margin-left: 15px; display: flex; align-items: center; }
+.carrito { margin-left: 15px; display: flex; align-items: center; color: white;}
 
-/* Contenedor principal de la página (para centrar) */
-.carrito-main {
-    padding: 60px 24px;
-    max-width: 900px; /* Limitar el ancho de la tabla */
-    margin: 0 auto;
-}
 
-/* Tabla del Carrito */
-.tabla-carrito {
-    width: 100%; /* Ocupa el ancho máximo del contenedor */
-    border-collapse: collapse; /* Elimina espacios entre celdas */
-    margin-top: 30px;
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-}
+/*
+====================================
+CSS
 
-.tabla-carrito th, .tabla-carrito td {
-    padding: 12px 15px;
-    border-bottom: 1px solid #eee;
-    text-align: left;
-    vertical-align: middle;
-}
-
-.tabla-carrito th {
-    background-color: #f8f8f8;
-    font-weight: bold;
-    text-transform: uppercase;
-    font-size: 0.9rem;
-}
-
-/* 🚨 Input de Cantidad 🚨 */
-.input-cantidad {
-    width: 60px; /* Ancho fijo para que no se desborde */
-    padding: 5px;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-    text-align: center;
-    font-size: 1rem;
-}
-
-/* Botón de Eliminar (❌) */
-.btn-quitar {
-    background: none;
-    border: none;
-    color: #CC0055; /* Magenta de acento */
-    cursor: pointer;
-    font-size: 1.2rem;
-}
-
-/* Resumen del Pedido */
-.carrito-resumen {
-    margin-top: 40px;
-    padding: 20px;
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-    text-align: right; /* Alineamos los totales a la derecha */
-}
-
-.carrito-resumen h4, .carrito-resumen p {
-    display: flex;
-    justify-content: space-between;
-    font-size: 1.1rem;
-}
-
-.final-total {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #D6336C; /* Magenta */
-    margin-top: 10px;
-}
-
-/* Botones de Acción (Finalizar y Vaciar) */
-#btn-finalizar-compra {
-    background: #D6336C; /* Magenta - Botón Principal */
-    color: white;
-    padding: 10px 20px;
-    border-radius: 4px;
-    border: none;
-    margin-top: 15px;
-}
-
-/* ===== RESPONSIVE (mobile) ===== */
+/*
+====================================
+ 3. RESPONSIVE (Mobile)
+====================================
+*/
 
 @media (max-width: 768px) {
+    /* Resetear centrado y márgenes del header */
     header { 
         padding: 10px 14px; 
         max-width: none;
         margin: 0;
+        
+        display: flex;
+        align-items: center;
+        /* CLAVE: Asegurar la correcta distribución y envoltura de elementos */
+        justify-content: space-between; 
+        flex-wrap: wrap; 
+    }
+    
+    /* 🚨 1. PRIMERA FILA: Hamburguesa, Logo, Iconos 🚨 */
+
+    /* Mostrar icono hamburguesa */
+    .menu-icon { 
+        display: block; 
+        order: 1; 
+        font-size: 2rem; 
+        margin-right: 15px; 
+    }
+    
+    /* Logo: Le damos un orden temprano */
+    .logo { 
+        order: 2; 
+        margin: 0 10px; 
+        padding-right: 0;
+    }
+    
+    /* Carrito y Login: Se mantiene a la derecha de la fila 1 */
+    .login-link { 
+        order: 3; 
+        margin-left: 10px;
+    }
+    .carrito { 
+        order: 4; 
+        margin-right: 0;
+        margin-left: 10px; /* Separar del Login */
     }
 
-    /* Estructura de iconos en móvil */
-    .menu-icon { display: block; order: 1; color: white; font-size: 2rem; }
-    .logo { order: 2; margin: 0; padding-right: 0; /* Resetear margin auto del logo */ }
-    .carrito { order: 3; margin-right: 0;}
+    /* 🚨 2. SEGUNDA FILA: Búsqueda y Navegación 🚨 */
 
-    /* Búsqueda y Navegación */
-    .search-bar { order: 4; width: 100%; padding: 6px 0; }
-    .navbar { order: 5; width: 100%; display: none; }
+    /* Búsqueda: Ocupa toda la fila inferior */
+    .search-bar { 
+        order: 5; 
+        width: 100%; 
+        padding: 6px 0; 
+        min-width: 100%;
+        justify-content: center;
+    }
     
-    #menu-toggle:checked + .menu-icon + .navbar { display: block; } 
-    .menu { flex-direction: column; width: 100%; background: #111; }
+    /* Navbar: Oculto por defecto, pero se extiende para el menú */
+    .navbar { 
+        order: 6; 
+        width: 100%; 
+        margin-right: 0;
+        display: none; /* ⬅️ Oculto por defecto */
+        max-width: none;
+        background: #111; /* Para que la barra de menú tenga fondo oscuro */
+    }
+
+    /* Usamos el selector de Hermano General (~) para que funcione con el Flexbox */
+    #menu-toggle:checked ~ .navbar { 
+        display: block !important; /* Muestra el menú de navegación */
+    } 
+
+    /* Estilos del menú desplegado */
+    .menu { flex-direction: column; width: 100%; background: #111; gap: 0; }
     
     /* Contenido */
     .content-wrapper { padding: 0 10px; }
     .banner { height: 200px; margin: 10px auto; }
 }
-
-
 /*
 ====================================
  3. BANNER / SLIDER
