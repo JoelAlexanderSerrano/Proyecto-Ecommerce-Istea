@@ -16,32 +16,23 @@ document.addEventListener('DOMContentLoaded', () => {
     initSearch();
     initMobileMenu();
 
-    // 🚨 2. LÓGICA DEL DROPDOWN (SOLUCIÓN FINAL DE SELECCIÓN) 🚨
     document.querySelectorAll('.dropdown > a').forEach(link => {
         link.addEventListener('click', function(e) {
             
             // Detiene la navegación (si href="#") para permitir el despliegue
             e.preventDefault(); 
             
-            // 🚨 CLAVE: Buscar el submenú navegando al LI padre y luego al UL hijo 🚨
-            const parentLi = this.closest('.dropdown');
-            const submenu = parentLi ? parentLi.querySelector('.dropdown-content') : null;
+            const parent = this.parentElement; // <li class="dropdown">
+            const submenu = parent.querySelector(".dropdown-content");
 
             // Si el submenú existe, procedemos al toggle
-            if (submenu) {
-                
-                // Cierra cualquier otro submenú abierto
-                document.querySelectorAll('.dropdown-content.open').forEach(openMenu => {
-                    if (openMenu !== submenu) {
-                        openMenu.classList.remove('open');
-                    }
-                });
-                
-                // Alterna la clase 'open' para desplegar/ocultar
-                submenu.classList.toggle('open');
-            }
-        });
-    });
+  if (submenu.style.display === "block") {
+      submenu.style.display = "none";
+    } else {
+      submenu.style.display = "block";
+    }
+  });
+});
 
     // 3. Lógica de Filtrado y Búsqueda (SPA)
     const urlParams = new URLSearchParams(window.location.search);

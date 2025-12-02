@@ -183,8 +183,6 @@ header {
     display: block !important;
 }
 
-@media (hover: hover) and (min-width: 769px) { .dropdown:hover .dropdown-content { display: block; } }
-
 /* Carrito y Login */
 .login-link { color: white; font-size: 1.2rem; text-decoration: none; margin-left: 15px; display: flex; align-items: center; }
 .carrito { margin-left: 15px; display: flex; align-items: center; color: white;}
